@@ -76,7 +76,7 @@
             margin-bottom: 5px;
         }
 
-        /* الأسماء تحت بعض بخط كبير في الغلاف بالعربي */
+        /* الأسماء تحت بعض بخط كبير */
         .couple-names-ar {
             font-family: 'Reem Kufi', sans-serif;
             font-size: 2.8rem;
@@ -99,7 +99,6 @@
         .sub-header {
             font-family: 'Reem Kufi', sans-serif;
             font-size: 1rem;
-            letter-spacing: 1px;
             color: #8c726a;
             margin-bottom: 20px;
         }
@@ -173,7 +172,6 @@
             font-family: 'Reem Kufi', sans-serif;
             font-size: 1.2rem;
             color: var(--text-dark);
-            letter-spacing: 1px;
             animation: fadeInOut 2s infinite;
         }
 
@@ -215,7 +213,6 @@
             margin-bottom: 10px;
         }
 
-        /* الأسماء بالعربي بالداخل تحت بعض وبخط كبير */
         .names-ar-inside {
             font-family: 'Reem Kufi', sans-serif;
             font-size: 3.2rem;
@@ -229,4 +226,98 @@
             display: block;
         }
 
-        .and
+        .and-symbol-inside {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin: 5px 0;
+        }
+
+        .verse {
+            font-size: 1.15rem;
+            color: #555;
+            margin: 15px 0;
+            font-style: italic;
+        }
+
+        /* معرض الصور بالداخل */
+        .slider-container {
+            position: relative;
+            width: 100%;
+            margin: 25px 0;
+            overflow: hidden;
+            border-radius: 15px;
+            background: #faf6f0;
+            padding: 10px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.03);
+            direction: ltr; /* إصلاح حركة الصور */
+        }
+
+        .slider-wrapper {
+            display: flex;
+            transition: transform 0.4s ease-in-out;
+            width: 100%;
+        }
+
+        .slide {
+            min-width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slide img {
+            max-width: 100%;
+            max-height: 420px;
+            height: auto;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(139, 90, 43, 0.75);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .prev-btn { left: 12px; }
+        .next-btn { right: 12px; }
+
+        .dots-container {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 10px;
+            direction: rtl;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background-color: #ccc;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .dot.active {
+            background-color: var(--secondary-color);
+            width: 12px;
+            height: 12px;
+        }
+
+        .details {
+            margin: 25px 0;
+            padding: 20px;
+            background: #fdf8f2;
+            border-radius:
