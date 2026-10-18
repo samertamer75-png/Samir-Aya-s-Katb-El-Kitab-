@@ -221,7 +221,7 @@
             direction: rtl;
         }
 
-        /* معرض الصور لـ 7 صور */
+        /* معرض الصور */
         .slider-container {
             position: relative;
             width: 100%;
@@ -230,6 +230,11 @@
             border-radius: 12px;
             background: #faf6f0;
             padding: 10px;
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .slide-img {
@@ -356,7 +361,7 @@
 
         <!-- المعرض بنقاط التنقل لـ 7 صور -->
         <div class="slider-container">
-            <img id="currentImage" class="slide-img" src="baby_combine.png" alt="صورة العروسين">
+            <img id="currentImage" class="slide-img" src="./image_1.png" alt="صورة العروسين">
             <div class="dots-container">
                 <span class="dot active" onclick="goToSlide(0, event)"></span>
                 <span class="dot" onclick="goToSlide(1, event)"></span>
@@ -411,15 +416,15 @@
             }
         }
 
-        // قائمة الصور السبع
+        // أسماء وإمتدادات الصور الدقيقة كما هي في GitHub
         var images = [
-            "baby_combine.png",
-            "image_1.png",
-            "image_2.png",
-            "image_3.png",
-            "image_4.png",
-            "image_5.png",
-            "image_6.png"
+            "./image_1.png",
+            "./image_2.png",
+            "./image_3.png",
+            "./image_4.png",
+            "./image_5.jpeg",
+            "./image_6.jpeg",
+            "./image_7.jpeg"
         ];
         var currentIndex = 0;
 
