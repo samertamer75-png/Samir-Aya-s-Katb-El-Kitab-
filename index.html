@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>دعوة كتب كتاب - سمير وآية</title>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Reem+Kufi:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Reem+Kufi:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-color: #8b5a2b;
@@ -215,22 +215,21 @@
             margin-bottom: 10px;
         }
 
-        /* الأسماء بالإنجليزية بالداخل تحت بعض وبخط كبير */
-        .names-en {
-            font-family: 'Playfair Display', serif;
+        /* الأسماء بالعربي بالداخل تحت بعض وبخط كبير */
+        .names-ar-inside {
+            font-family: 'Reem Kufi', sans-serif;
             font-size: 3.2rem;
             color: var(--secondary-color);
             margin: 15px 0;
             font-weight: bold;
             line-height: 1.2;
-            direction: ltr;
         }
 
-        .names-en span {
+        .names-ar-inside span {
             display: block;
         }
 
-        .and-symbol-en {
+        .and-symbol-inside {
             font-size: 2rem;
             color: var(--primary-color);
             margin: 5px 0;
@@ -320,179 +319,4 @@
 
         .details {
             margin: 25px 0;
-            padding: 20px;
-            background: #fdf8f2;
-            border-radius: 12px;
-            border-right: 4px solid var(--secondary-color);
-            text-align: right;
-        }
-
-        .details p {
-            font-size: 1.2rem;
-            margin: 8px 0;
-        }
-
-        .map-btn {
-            display: inline-block;
-            background-color: var(--secondary-color);
-            color: #fff;
-            padding: 12px 28px;
-            font-size: 1.1rem;
-            font-family: 'Reem Kufi', sans-serif;
-            border-radius: 25px;
-            text-decoration: none;
-            margin-top: 15px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            transition: background 0.3s;
-        }
-
-        .map-btn:hover {
-            background-color: var(--primary-color);
-        }
-
-        .footer {
-            margin-top: 25px;
-            font-size: 1.1rem;
-            color: var(--primary-color);
-            font-weight: bold;
-        }
-
-        @media (max-width: 480px) {
-            .envelope-box::before {
-                border-left-width: 130px;
-                border-right-width: 130px;
-                border-top-width: 80px;
-            }
-            .couple-names-ar { font-size: 2.3rem; }
-            .names-en { font-size: 2.6rem; }
-        }
-    </style>
-</head>
-<body>
-
-    <!-- شاشة الظرف المغلق في البداية (بالعربي) -->
-    <div class="envelope-screen" id="envelopeScreen">
-        <div class="invitation-card">
-            <div class="invited-text">يسرنا دعوتكم لحضور حفل</div>
-            
-            <div class="couple-names-ar">
-                <span>سمير</span>
-                <span class="and-symbol-ar">&</span>
-                <span>آية</span>
-            </div>
-
-            <div class="sub-header">عقد قران</div>
-
-            <div class="envelope-box">
-                <div class="wax-seal">س & آ</div>
-            </div>
-
-            <div class="quote-1">بداية فصل جديد من العمر</div>
-            <div class="quote-2">تكتمل بحضوركم</div>
-        </div>
-        
-        <div class="tap-to-open">اضغط لفتح الدعوة ✉️</div>
-    </div>
-
-    <!-- محتوى الدعوة من الداخل (بالإنجليزية للأسماء) -->
-    <div class="main-content" id="mainContent">
-        <h1 class="header-title">دعوة كتب كتاب</h1>
-        
-        <p class="verse">"وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً"</p>
-
-        <!-- الأسماء تحت بعض بالإنجليزية بخط كبير -->
-        <div class="names-en">
-            <span>Samir</span>
-            <span class="and-symbol-en">&</span>
-            <span>AYA</span>
-        </div>
-
-        <p style="font-size: 1.2rem;">يتشرفان بدعوتكم لمشاركتهما فرحة عقد قرانهما</p>
-
-        <!-- معرض الصور بالداخل -->
-        <div class="slider-container">
-            <button class="slider-btn prev-btn" onclick="prevSlide(event)">❮</button>
-            <button class="slider-btn next-btn" onclick="nextSlide(event)">❯</button>
-            <div class="slider-wrapper" id="sliderWrapper">
-                <div class="slide"><img src="baby_combine.png" alt="صورة العروسين"></div>
-                <div class="slide"><img src="image_1.png" alt="صورة 1"></div>
-                <div class="slide"><img src="image_2.png" alt="صورة 2"></div>
-                <div class="slide"><img src="image_4.png" alt="صورة 4"></div>
-            </div>
-            <div class="dots-container" id="dotsContainer">
-                <span class="dot active" onclick="goToSlide(0, event)"></span>
-                <span class="dot" onclick="goToSlide(1, event)"></span>
-                <span class="dot" onclick="goToSlide(2, event)"></span>
-                <span class="dot" onclick="goToSlide(3, event)"></span>
-            </div>
-        </div>
-
-        <!-- مشغل الصوت -->
-        <audio id="weddingMusic" loop>
-            <source src="Music.mp3" type="audio/mpeg">
-            متصفحك لا يدعم تشغيل الصوت.
-        </audio>
-
-        <!-- تفاصيل الموعد والمكان واللوكيشن الصحيح -->
-        <div class="details">
-            <h3>🗓️ التاريخ والزمان</h3>
-            <p>الخميس، 31 ديسمبر 2026</p>
-            <p>من الساعة 2 ظهراً إلى الساعة 6 مساءً</p>
-            
-            <h3 style="margin-top: 15px;">📍 مكان الفرح</h3>
-            <p>قاعات جرين و كريستال للحفلات</p>
-            
-            <a href="https://maps.app.goo.gl/FuwWFoWyjxLFKwdWA" target="_blank" class="map-btn">📍 افتح اللوكيشن على الخريطة</a>
-        </div>
-
-        <div class="footer">
-            حضوركم يسعدنا وتكتمل به فرحتنا! ❤️
-        </div>
-    </div>
-
-    <script>
-        // إفساح المجال للضغط على الشاشة بالكامل للفتح
-        document.getElementById('envelopeScreen').addEventListener('click', function() {
-            this.classList.add('hidden');
-            document.getElementById('mainContent').classList.add('visible');
-            var music = document.getElementById('weddingMusic');
-            music.play().catch(function(error) {
-                console.log("Audio play error:", error);
-            });
-        });
-
-        // كود المعرض والأسهم
-        let currentSlide = 0;
-        const totalSlides = 4;
-
-        function updateSlider() {
-            const wrapper = document.getElementById('sliderWrapper');
-            wrapper.style.transform = `translateX(${currentSlide * 100}%)`;
-            
-            const dots = document.querySelectorAll('.dot');
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentSlide);
-            });
-        }
-
-        function nextSlide(e) {
-            if(e) e.stopPropagation();
-            currentSlide = (currentSlide + 1) % totalSlides;
-            updateSlider();
-        }
-
-        function prevSlide(e) {
-            if(e) e.stopPropagation();
-            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-            updateSlider();
-        }
-
-        function goToSlide(index, e) {
-            if(e) e.stopPropagation();
-            currentSlide = index;
-            updateSlider();
-        }
-    </script>
-
-</body>
-</html>
+            padding: 2
