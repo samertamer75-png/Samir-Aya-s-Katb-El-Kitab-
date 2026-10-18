@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دعوة كتب كتاب سمير وآية</title>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Reem+Kufi:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>دعوة كتب كتاب Samir & AYA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Playfair+Display:ital,wght@0,600;1,600&family=Reem+Kufi:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-color: #8b5a2b;
@@ -32,7 +32,7 @@
             padding: 10px;
         }
 
-        /* شاشة الجواب التفاعلي (الظرف المغلق) */
+        /* شاشة الغلاف بدون الصورة القديمة */
         .envelope-screen {
             position: fixed;
             top: 0;
@@ -57,10 +57,10 @@
 
         .envelope-card {
             background: var(--card-bg);
-            max-width: 450px;
+            max-width: 420px;
             width: 100%;
-            border-radius: 15px;
-            overflow: hidden;
+            border-radius: 20px;
+            padding: 40px 20px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.3);
             border: 2px solid var(--secondary-color);
             cursor: pointer;
@@ -68,22 +68,36 @@
             animation: pulse-glow 2s infinite;
         }
 
-        .envelope-card img {
-            width: 100%;
-            height: auto;
-            display: block;
-            object-fit: contain;
+        .envelope-card h2 {
+            font-family: 'Reem Kufi', sans-serif;
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .envelope-card .cover-names {
+            font-family: 'Playfair Display', serif;
+            color: var(--secondary-color);
+            font-size: 2.5rem;
+            margin: 15px 0;
+            font-weight: bold;
+            direction: ltr;
+        }
+
+        .envelope-card p {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
         }
 
         .open-btn {
             background-color: var(--primary-color);
             color: #fff;
             border: none;
-            padding: 12px 30px;
-            font-size: 1.3rem;
+            padding: 12px 35px;
+            font-size: 1.2rem;
             font-family: 'Reem Kufi', sans-serif;
             border-radius: 30px;
-            margin: 20px 0;
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             transition: background 0.3s;
@@ -133,10 +147,12 @@
         }
 
         .names {
-            font-size: 2.5rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
             color: var(--secondary-color);
             margin: 15px 0;
             font-weight: bold;
+            direction: ltr;
         }
 
         .verse {
@@ -269,25 +285,27 @@
 </head>
 <body>
 
-    <!-- شاشة الجواب التفاعلي الأولية (الظرف المغلق) -->
+    <!-- شاشة الغلاف -->
     <div class="envelope-screen" id="envelopeScreen" onclick="openInvitation()">
         <div class="envelope-card">
-            <img src="image_2.png" alt="غلاف الدعوة">
+            <h2>دعوة كتب كتاب</h2>
+            <div class="cover-names">Samir & AYA</div>
+            <p>اضغط لفتح الدعوة ومشاهدة التفاصيل</p>
             <button class="open-btn">Tap to open</button>
         </div>
     </div>
 
-    <!-- محتوى الدعوة من الداخل (يفتح بعد الضغط على الجواب) -->
+    <!-- محتوى الدعوة من الداخل -->
     <div class="main-content" id="mainContent">
         <h1 class="header-title">دعوة كتب كتاب</h1>
         
         <p class="verse">"وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً"</p>
 
-        <div class="names">سمير & آية</div>
+        <div class="names">Samir & AYA</div>
 
         <p style="font-size: 1.2rem;">يتشرفان بدعوتكم لمشاركتهما فرحة عقد قرانهما</p>
 
-        <!-- معرض جميع الصور بالداخل لتبديلها وتصفحها -->
+        <!-- معرض الصور بالداخل -->
         <div class="slider-container">
             <button class="slider-btn prev-btn" onclick="prevSlide()">❮</button>
             <button class="slider-btn next-btn" onclick="nextSlide()">❯</button>
@@ -332,41 +350,4 @@
         function openInvitation() {
             document.getElementById('envelopeScreen').classList.add('hidden');
             document.getElementById('mainContent').classList.add('visible');
-            var music = document.getElementById('weddingMusic');
-            music.play().catch(function(error) {
-                console.log("Audio autoplay prevented by browser:", error);
-            });
-        }
-
-        // كود التحكم في سلايدر الصور
-        let currentSlide = 0;
-        const totalSlides = 4;
-
-        function updateSlider() {
-            const wrapper = document.getElementById('sliderWrapper');
-            wrapper.style.transform = `translateX(${currentSlide * 100}%)`;
-            
-            const dots = document.querySelectorAll('.dot');
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentSlide);
-            });
-        }
-
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            updateSlider();
-        }
-
-        function prevSlide() {
-            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-            updateSlider();
-        }
-
-        function goToSlide(index) {
-            currentSlide = index;
-            updateSlider();
-        }
-    </script>
-
-</body>
-</html>
+            var music = document.getElementById('weddingMusic
