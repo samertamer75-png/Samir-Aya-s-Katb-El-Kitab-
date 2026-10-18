@@ -32,7 +32,7 @@
             padding: 10px;
         }
 
-        /* حاوية الغلاف التفاعلي (الظرف) */
+        /* شاشة الغلاف التفاعلي (الظرف) */
         .envelope-screen {
             position: fixed;
             top: 0;
@@ -100,7 +100,7 @@
             100% { transform: scale(1); box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); }
         }
 
-        /* محتوى الدعوة الرئيسي (مخفي حتى يتم فتح الظرف) */
+        /* محتوى الدعوة الرئيسي */
         .main-content {
             max-width: 600px;
             width: 100%;
@@ -110,7 +110,7 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             border: 2px solid #f1e5d1;
             margin: 20px auto;
-            display: none; /* مخفي في البداية */
+            display: none;
         }
 
         .main-content.visible {
@@ -177,11 +177,31 @@
             background: #fdf8f2;
             border-radius: 12px;
             border-right: 4px solid var(--secondary-color);
+            text-align: right;
         }
 
         .details p {
             font-size: 1.2rem;
             margin: 8px 0;
+        }
+
+        /* زر اللوكيشن */
+        .map-btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: #fff;
+            padding: 10px 25px;
+            font-size: 1.1rem;
+            font-family: 'Reem Kufi', sans-serif;
+            border-radius: 25px;
+            text-decoration: none;
+            margin-top: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: background 0.3s;
+        }
+
+        .map-btn:hover {
+            background-color: var(--primary-color);
         }
 
         .footer {
@@ -194,16 +214,15 @@
 </head>
 <body>
 
-    <!-- شاشة الغلاف التفاعلي (الظرف المغلق) -->
+    <!-- شاشة الغلاف التفاعلي (الظرف) -->
     <div class="envelope-screen" id="envelopeScreen" onclick="openInvitation()">
         <div class="envelope-card">
-            <!-- يمكنك استخدام image_2.png كصورة الغلاف أو الظرف -->
             <img src="image_2.png" alt="غلاف الدعوة">
             <button class="open-btn">Tap to open</button>
         </div>
     </div>
 
-    <!-- محتوى الدعوة الأساسي (يظهر بعد الفتح وتعمل الموسيقى) -->
+    <!-- محتوى الدعوة الأساسي -->
     <div class="main-content" id="mainContent">
         <h1 class="header-title">دعوة كتب كتاب</h1>
         
@@ -218,7 +237,7 @@
             <img src="baby_combine.png" alt="صورة العروسين">
         </div>
 
-        <!-- مشغل الصوت (يعمل تلقائياً عند فتح الظرف) -->
+        <!-- مشغل الصوت -->
         <audio id="weddingMusic" loop>
             <source src="Music.mp3" type="audio/mpeg">
             متصفحك لا يدعم تشغيل الصوت.
@@ -226,12 +245,19 @@
 
         <!-- تفاصيل الموعد والمكان -->
         <div class="details">
-            <h3>التاريخ والزمان</h3>
-            <p>🗓️ الخميس، 31 ديسمبر 2026</p>
-            <p>⏰ الساعة السابعة مساءً</p>
+            <h3>🗓️ التاريخ والزمان</h3>
+            <p>الخميس، 31 ديسمبر 2026</p>
+            <p>الساعة السابعة مساءً</p>
+            
+            <h3 style="margin-top: 15px;">📍 مكان الفرح</h3>
+            <p>قاعة الاحتفالات (أو اسم القاعة/الندوة)</p>
+            <p style="font-size: 1rem; color: #666;">الرياض، المملكة العربية السعودية</p>
+            
+            <!-- زر فتح اللوكيشن على خرائط جوجل (يمكنك استبدال الرابط برابط القاعة الفعلي) -->
+            <a href="https://maps.google.com" target="_blank" class="map-btn">📍 افتح اللوكيشن على الخريطة</a>
         </div>
 
-        <!-- معرض الصور المتبقية -->
+        <!-- معرض الصور -->
         <h3>أجمل اللحظات</h3>
         <div class="gallery">
             <div class="content-image"><img src="image_1.png" alt="صورة 1"></div>
@@ -245,11 +271,8 @@
 
     <script>
         function openInvitation() {
-            // إخفاء شاشة الغلاف
             document.getElementById('envelopeScreen').classList.add('hidden');
-            // إظهار محتوى الدعوة
             document.getElementById('mainContent').classList.add('visible');
-            // تشغيل الموسيقى بعد الضغط
             var music = document.getElementById('weddingMusic');
             music.play().catch(function(error) {
                 console.log("Audio autoplay prevented by browser:", error);
@@ -259,4 +282,3 @@
 
 </body>
 </html>
-
