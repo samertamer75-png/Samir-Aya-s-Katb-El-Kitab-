@@ -108,17 +108,12 @@
             margin-bottom: 20px;
         }
 
+        /* الختم الشمعي بدون أي كتابة */
         .wax-seal {
             width: 65px;
             height: 65px;
             background: #8a1c2e;
             border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #ffffff;
-            font-size: 1.2rem;
-            font-weight: bold;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
             border: 2px solid #5c101c;
         }
@@ -177,7 +172,7 @@
             font-style: italic;
         }
 
-        /* معرض الصور */
+        /* معرض الصور مع نقاط التنقل */
         .slider-container {
             position: relative;
             width: 100%;
@@ -193,23 +188,29 @@
             max-height: 400px;
             object-fit: contain;
             border-radius: 10px;
+            transition: opacity 0.3s ease;
         }
 
-        .slider-controls {
+        .dots-container {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-top: 10px;
+            align-items: center;
+            gap: 10px;
+            margin-top: 12px;
         }
 
-        .slider-btn {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 20px;
+        .dot {
+            width: 12px;
+            height: 12px;
+            background-color: #dcd3c8;
+            border-radius: 50%;
             cursor: pointer;
-            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background-color: var(--primary-color);
+            transform: scale(1.25);
         }
 
         .details {
@@ -262,7 +263,7 @@
             <div class="sub-header">عقد قران</div>
 
             <div class="envelope-box">
-                <div class="wax-seal">س & آ</div>
+                <div class="wax-seal"></div>
             </div>
 
             <div style="color: #666; margin-bottom: 5px;">بداية فصل جديد من العمر</div>
@@ -286,12 +287,14 @@
 
         <p style="font-size: 1.2rem;">يتشرفان بدعوتكم لمشاركتهما فرحة عقد قرانهما</p>
 
-        <!-- المعرض -->
+        <!-- المعرض بنقاط التنقل -->
         <div class="slider-container">
             <img id="currentImage" class="slide-img" src="baby_combine.png" alt="صورة العروسين">
-            <div class="slider-controls">
-                <button class="slider-btn" onclick="prevImg(event)">السابقة ❮</button>
-                <button class="slider-btn" onclick="nextImg(event)">التالية ❯</button>
+            <div class="dots-container">
+                <span class="dot active" onclick="goToSlide(0, event)"></span>
+                <span class="dot" onclick="goToSlide(1, event)"></span>
+                <span class="dot" onclick="goToSlide(2, event)"></span>
+                <span class="dot" onclick="goToSlide(3, event)"></span>
             </div>
         </div>
 
@@ -326,20 +329,19 @@
             }
         }
 
-        // الصور
+        // الصور ونقاط التنقل
         const images = ["baby_combine.png", "image_1.png", "image_2.png", "image_4.png"];
         let currentIndex = 0;
 
-        function nextImg(e) {
-            if(e) e.stopPropagation();
-            currentIndex = (currentIndex + 1) % images.length;
+        function goToSlide(index, e) {
+            if (e) e.stopPropagation();
+            currentIndex = index;
             document.getElementById('currentImage').src = images[currentIndex];
-        }
-
-        function prevImg(e) {
-            if(e) e.stopPropagation();
-            currentIndex = (currentIndex - 1 + images.length) % images.length;
-            document.getElementById('currentImage').src = images[currentIndex];
+            
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, idx) => {
+                dot.classList.toggle('active', idx === currentIndex);
+            });
         }
     </script>
 
