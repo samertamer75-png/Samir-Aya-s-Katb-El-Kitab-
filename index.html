@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>دعوة كتب كتاب - سمير وآية</title>
+    <!-- مكتبة احتفالية الزخات الملونة (Confetti) -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         :root {
             --primary-color: #8b5a2b;
@@ -29,6 +31,7 @@
             justify-content: center;
             align-items: center;
             padding: 15px;
+            overflow-x: hidden;
         }
 
         /* ===== شاشة الظرف المغلق ===== */
@@ -46,10 +49,15 @@
             z-index: 9999;
             padding: 20px;
             cursor: pointer;
+            transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease, visibility 0.8s;
         }
 
-        .envelope-screen.hidden {
-            display: none !important;
+        /* تأثير فتح الظرف بحركة سينمائية */
+        .envelope-screen.opened {
+            transform: scale(1.15) translateY(-50px);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
         }
 
         .invitation-card {
@@ -63,6 +71,11 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        .invitation-card:hover {
+            transform: translateY(-3px);
         }
 
         .invited-text {
@@ -108,8 +121,14 @@
             height: 65px;
             background: #8a1c2e;
             border-radius: 50%;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.35);
             border: 2px solid #5c101c;
+            animation: pulseGlow 2.5s infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { transform: scale(1); box-shadow: 0 4px 12px rgba(0,0,0,0.35); }
+            50% { transform: scale(1.05); box-shadow: 0 6px 18px rgba(138, 28, 46, 0.5); }
         }
 
         .tap-to-open {
@@ -117,6 +136,12 @@
             font-size: 1.2rem;
             font-weight: bold;
             color: var(--text-dark);
+            animation: bounceText 1.8s infinite;
+        }
+
+        @keyframes bounceText {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
         }
 
         /* ===== محتوى الدعوة الداخلي ===== */
@@ -126,14 +151,19 @@
             background: #ffffff;
             padding: 30px 20px;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 35px rgba(0,0,0,0.12);
             border: 2px solid #f1e5d1;
             margin: 20px auto;
             display: none;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease, transform 1s ease;
         }
 
         .main-content.visible {
             display: block !important;
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .header-title {
@@ -143,11 +173,12 @@
         }
 
         .names-ar-inside {
-            font-size: 3rem;
+            font-size: 3.2rem;
             color: var(--secondary-color);
-            margin: 15px 0 5px 0;
+            margin: 15px 0 10px 0;
             font-weight: bold;
             line-height: 1.2;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
 
         .names-ar-inside span {
@@ -159,13 +190,6 @@
             color: var(--primary-color);
         }
 
-        .event-sub-tag {
-            font-size: 1.6rem;
-            color: var(--text-dark);
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
         .verse {
             font-size: 1.2rem;
             color: #555;
@@ -173,34 +197,51 @@
             font-style: italic;
         }
 
-        /* العداد التنازلي */
+        /* العداد التنازلي المطور بتصميم زجاجي فاخر */
         .countdown-container {
             display: flex;
             justify-content: center;
             gap: 12px;
-            margin: 20px 0;
+            margin: 25px 0;
             direction: ltr;
         }
 
         .time-box {
-            background: #fdf8f2;
+            background: linear-gradient(145deg, #6e2a36, #8a1c2e);
             border: 1px solid var(--secondary-color);
-            border-radius: 10px;
-            padding: 10px 12px;
-            min-width: 65px;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+            border-radius: 12px;
+            padding: 12px 10px;
+            min-width: 70px;
+            box-shadow: 0 6px 15px rgba(110, 42, 54, 0.25);
+            color: #ffffff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .time-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            pointer-events: none;
         }
 
         .time-number {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: bold;
-            color: var(--text-dark);
+            color: #d4af37;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
         }
 
         .time-label {
             font-size: 0.85rem;
-            color: #777;
-            margin-top: 2px;
+            color: #fdf8f2;
+            margin-top: 4px;
             direction: rtl;
         }
 
@@ -242,7 +283,7 @@
 
         .dot.active {
             background-color: var(--primary-color);
-            transform: scale(1.25);
+            transform: scale(1.3);
         }
 
         .details {
@@ -269,6 +310,12 @@
             text-decoration: none;
             margin-top: 15px;
             font-weight: bold;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+            transition: background 0.3s;
+        }
+
+        .map-btn:hover {
+            background-color: var(--primary-color);
         }
 
         .footer {
@@ -315,11 +362,9 @@
             <span>آية</span>
         </div>
 
-        <div class="event-sub-tag">كتب الكتاب</div>
-
         <p style="font-size: 1.2rem;">يتشرفان بدعوتكم لمشاركتهما فرحة عقد قرانهما</p>
 
-        <!-- العداد التنازلي -->
+        <!-- العداد التنازلي التفاعلي الأنيق -->
         <div class="countdown-container">
             <div class="time-box">
                 <div class="time-number" id="days">00</div>
@@ -373,15 +418,32 @@
 
     <script>
         function openEnvelope() {
-            document.getElementById('envelopeScreen').classList.add('hidden');
-            document.getElementById('mainContent').classList.add('visible');
+            // تأثير حركة فتح الجواب
+            const env = document.getElementById('envelopeScreen');
+            env.classList.add('opened');
+            
+            setTimeout(() => {
+                document.getElementById('mainContent').classList.add('visible');
+            }, 300);
+
+            // إطلاق الزخات الملونة الاحتفالية (Confetti)
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 80,
+                    spread: 70,
+                    origin: { y: 0.6 },
+                    colors: ['#d4af37', '#8a1c2e', '#8b5a2b', '#ffffff']
+                });
+            }
+
+            // تشغيل الصوت
             var music = document.getElementById('weddingMusic');
             if (music) {
                 music.play().catch(function(e) { console.log(e); });
             }
         }
 
-        // الصور ونقاط التنقل
+        // معرض الصور
         const images = ["baby_combine.png", "image_1.png", "image_2.png", "image_4.png"];
         let currentIndex = 0;
 
@@ -396,7 +458,7 @@
             });
         }
 
-        // كود العداد التنازلي المباشر
+        // العداد التنازلي
         const eventDate = new Date('December 31, 2026 14:00:00').getTime();
 
         function updateCountdown() {
