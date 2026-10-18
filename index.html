@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دعوة كتب كتاب | سمير & آية</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@400;600;700&family=Reem+Kufi:wght@500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #8A1C40;
+            --secondary-color: #D4AF37;
+            --bg-color: #FDFBF7;
+            --text-dark: #2C2C2C;
+            --text-muted: #666666;
+            --card-bg: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            text-align: center;
+            overflow-x: hidden;
+            direction: rtl;
+        }
+
+        /* Cover Screen Overlay */
+        #cover-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #2a0813 0%, #8A1C40 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            color: #ffffff;
+            transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
+            cursor: pointer;
+        }
+
+        #cover-screen.opened {
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .cover-card {
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid rgba(212, 175, 55, 0.4);
+            padding: 40px 25px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            max-width: 90%;
+            width: 360px;
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .cover-title {
+            font-family: 'Aref Ruqaa', serif;
+            font-size: 2.2rem;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+
+        .cover-names {
+            font-family: 'Aref Ruqaa', serif;
+            font-size: 2.5rem;
+            margin: 15px 0;
+            line-height: 1.3;
+        }
+
+        .tap-hint {
+            margin-top: 25px;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.85);
+            background: rgba(212, 175, 55, 0.2);
+            padding: 10px 20px;
+            border-radius: 25px;
+            display: inline-block;
+            border: 1px solid var(--secondary-color);
+        }
+
+        /* Main Invitation Content */
+        .main-content {
+            opacity: 0;
+            transition: opacity 1s ease-in 0.5s;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px 15px 60px 15px;
+        }
+
+        body.active .main-content {
+            opacity: 1;
+        }
+
+        /* Audio Toggle Floating Button */
+        .audio-control {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: var(--card-bg);
+            border: 1px solid var(--secondary-color);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            cursor: pointer;
+        }
+
+        .audio-icon {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+        }
+
+        /* Section Styling */
+        section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 30px 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            position: relative;
+        }
+
+        .quran-verse {
+            font-family: 'Aref Ruqaa', serif;
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            line-height: 2;
+            margin-bottom: 15px;
+        }
+
+        .invitation-text {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .couple-names {
+            font-family: 'Aref Ruqaa', serif;
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin: 15px 0;
+            line-height: 1.2;
+        }
+
+        .couple-names span {
+            display: block;
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .event-badge {
+            display: inline-block;
+            background-color: rgba(138, 28, 64, 0.08);
+            color: var(--primary-color);
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .date-time-box {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            background: #FAFAFA;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px dashed var(--secondary-color);
+            margin-bottom: 25px;
+        }
+
+        /* Countdown Timer */
+        .countdown-title {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+
+        .timer-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            direction: ltr;
+        }
+
+        .timer-block {
+            background: var(--primary-color);
+            color: #ffffff;
+            padding: 10px 8px;
+            border-radius: 10px;
+            min-width: 60px;
+        }
+
+        .timer-number {
+            font-size: 1.4rem;
+            font-weight: 700;
+            font-family: monospace;
+        }
+
+        .timer-label {
+            font-size: 0.7rem;
+            margin-top: 2px;
+            opacity: 0.9;
+        }
+
+        /* Photo Gallery Slider */
+        .section-header {
+            font-family: 'Reem Kufi', sans-serif;
+            font-size: 1.6rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header::after {
+            content: '';
+            display: block;
+            width: 50%;
+            height: 2px;
+            background: var(--secondary-color);
+            margin: 6px auto 0;
+        }
+
+        .gallery-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .gallery-slider {
+            display: flex;
+            transition: transform 0.4s ease-in-out;
+            width: 100%;
+        }
+
+        .gallery-slide {
+            min-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .gallery-slide img {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .slider-controls {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background: #ccc;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .dot.active {
+            background: var(--primary-color);
+            width: 22px;
+            border-radius: 10px;
+        }
+
+        /* Location Section */
+        .venue-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .venue-sub {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .btn-maps {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: var(--primary-color);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 14px 28px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(138, 28, 64, 0.3);
+            transition: transform 0.2s, background-color 0.2s;
+            width: 100%;
+            max-width: 280px;
+        }
+
+        .btn-maps:active {
+            transform: scale(0.98);
+        }
+
+        footer {
+            margin-top: 30px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-family: 'Aref Ruqaa', serif;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Audio Element -->
+    <audio id="bg-music" loop>
+        <source src="Music.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Floating Audio Toggle Button -->
+    <div class="audio-control" onclick="toggleAudio()">
+        <span id="audio-icon" class="audio-icon">🎵</span>
+    </div>
+
+    <!-- Opening Cover Screen -->
+    <div id="cover-screen" onclick="openInvitation()">
+        <div class="cover-card">
+            <div class="cover-title">دعوة كتب كتاب</div>
+            <div style="font-size: 2rem;">✨</div>
+            <div class="cover-names">سمير <br>&amp;<br> آية</div>
+            <div class="tap-hint">اضغط هنا لفتح الدعوة ✉️</div>
+        </div>
+    </div>
+
+    <!-- Main Invitation Page -->
+    <div class="main-content">
+        
+        <!-- Header & Date Section -->
+        <section>
+            <div class="quran-verse">
+                "وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً"
+            </div>
+
+            <div class="invitation-text">نتشرف بدعوتكم لحضور حفل كتب كتاب</div>
+
+            <div class="couple-names">
+                سمير
+                <span>&amp;</span>
+                آية
+            </div>
+
+            <div class="event-badge">كتب الكتاب</div>
+
+            <div class="date-time-box">
+                🗓️ الخميس 31 ديسمبر 2026<br>
+                ⏰ من الساعة 2:00 ظهراً إلى 6:00 مساءً
+            </div>
+
+            <div class="countdown-title">المتبقي على يومنا المميز:</div>
+            <div class="timer-container">
+                <div class="timer-block">
+                    <div id="seconds" class="timer-number">00</div>
+                    <div class="timer-label">ثانية</div>
+                </div>
+                <div class="timer-block">
+                    <div id="minutes" class="timer-number">00</div>
+                    <div class="timer-label">دقيقة</div>
+                </div>
+                <div class="timer-block">
+                    <div id="hours" class="timer-number">00</div>
+                    <div class="timer-label">ساعة</div>
+                </div>
+                <div class="timer-block">
+                    <div id="days" class="timer-number">00</div>
+                    <div class="timer-label">يوم</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Photo Gallery Section -->
+        <section>
+            <div class="section-header">ذكرياتنا</div>
+            <div class="gallery-container">
+                <div class="gallery-slider" id="slider">
+                    <div class="gallery-slide">
+                        <img src="baby_combine.png" alt="سمير وآية صغاراً">
+                    </div>
+                    <div class="gallery-slide">
+                        <img src="image_1.png" alt="سمير وآية">
+                    </div>
+                    <div class="gallery-slide">
+                        <img src="image_2.png" alt="سمير وآية">
+                    </div>
+                    <div class="gallery-slide">
+                        <img src="image_4.png" alt="سمير وآية">
+                    </div>
+                </div>
+            </div>
+            <div class="slider-controls" id="dots-container"></div>
+        </section>
+
+        <!-- Location Section -->
+        <section>
+            <div class="section-header">مكان الحفل</div>
+            <div class="venue-name">قاعات جرين و كريستال للحفلات</div>
+            <div class="venue-sub">يسعدنا حضوركم لتكتمل فرحتنا 🌹</div>
+            <a href="https://maps.app.goo.gl/pR87PtqBkpcNt7db8" target="_blank" class="btn-maps">
+                📍 عرض الموقع على Google Maps
+            </a>
+        </section>
+
+        <footer>
+            بحضوركم تطيب اللحظات وتكتمل الفرحة ❤️
+        </footer>
+
+    </div>
+
+    <script>
+        // Open Invitation Card
+        function openInvitation() {
+            document.getElementById('cover-screen').classList.add('opened');
+            document.body.classList.add('active');
+            
+            // Auto Play Audio on Interaction
+            const audio = document.getElementById('bg-music');
+            audio.play().then(() => {
+                document.getElementById('audio-icon').innerText = '🔊';
+            }).catch(() => {
+                document.getElementById('audio-icon').innerText = '🔈';
+            });
+        }
+
+        // Toggle Audio
+        function toggleAudio() {
+            const audio = document.getElementById('bg-music');
+            const icon = document.getElementById('audio-icon');
+            if (audio.paused) {
+                audio.play();
+                icon.innerText = '🔊';
+            } else {
+                audio.pause();
+                icon.innerText = '🔈';
+            }
+        }
+
+        // Countdown Timer
+        const targetDate = new Date('December 31, 2026 14:00:00').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                document.getElementById('days').innerText = String(days).padStart(2, '0');
+                document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+                document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+            } else {
+                document.getElementById('days').innerText = '00';
+                document.getElementById('hours').innerText = '00';
+                document.getElementById('minutes').innerText = '00';
+                document.getElementById('seconds').innerText = '00';
+            }
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Photo Slider Logic
+        const slider = document.getElementById('slider');
+        const slides = document.querySelectorAll('.gallery-slide');
+        const dotsContainer = document.getElementById('dots-container');
+        let currentSlide = 0;
+
+        // Create Dots
+        slides.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(index));
+            dotsContainer.appendChild(dot);
+        });
+
+        const dots = document.querySelectorAll('.dot');
+
+        function goToSlide(index) {
+            currentSlide = index;
+            slider.style.transform = `translateX(${currentSlide * 100}%)`;
+            dots.forEach(dot => dot.classList.remove('active'));
+            dots[currentSlide].classList.add('active');
+        }
+
+        // Auto Slide Every 3.5 Seconds
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % slides.length;
+            goToSlide(currentSlide);
+        }, 3500);
+    </script>
+</body>
+</html>
