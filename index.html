@@ -52,7 +52,6 @@
             transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease, visibility 0.8s;
         }
 
-        /* تأثير فتح الظرف بحركة سينمائية */
         .envelope-screen.opened {
             transform: scale(1.15) translateY(-50px);
             opacity: 0;
@@ -245,7 +244,7 @@
             direction: rtl;
         }
 
-        /* معرض الصور */
+        /* معرض الصور لـ 7 صور */
         .slider-container {
             position: relative;
             width: 100%;
@@ -268,13 +267,14 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             margin-top: 12px;
+            flex-wrap: wrap;
         }
 
         .dot {
-            width: 12px;
-            height: 12px;
+            width: 11px;
+            height: 11px;
             background-color: #dcd3c8;
             border-radius: 50%;
             cursor: pointer;
@@ -343,149 +343,4 @@
                 <div class="wax-seal"></div>
             </div>
 
-            <div style="color: #666; margin-bottom: 5px;">بداية فصل جديد من العمر</div>
-            <div style="font-weight: bold; color: var(--text-dark);">تكتمل بحضوركم</div>
-        </div>
-        
-        <div class="tap-to-open">اضغط في أي مكان لفتح الدعوة ✉️</div>
-    </div>
-
-    <!-- محتوى الدعوة من الداخل -->
-    <div class="main-content" id="mainContent">
-        <h1 class="header-title">دعوة كتب كتاب</h1>
-        
-        <p class="verse">"وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً"</p>
-
-        <div class="names-ar-inside">
-            <span>سمير</span>
-            <span class="and-symbol-inside">&</span>
-            <span>آية</span>
-        </div>
-
-        <p style="font-size: 1.2rem;">يتشرفان بدعوتكم لمشاركتهما فرحة عقد قرانهما</p>
-
-        <!-- العداد التنازلي التفاعلي الأنيق -->
-        <div class="countdown-container">
-            <div class="time-box">
-                <div class="time-number" id="days">00</div>
-                <div class="time-label">يوم</div>
-            </div>
-            <div class="time-box">
-                <div class="time-number" id="hours">00</div>
-                <div class="time-label">ساعة</div>
-            </div>
-            <div class="time-box">
-                <div class="time-number" id="minutes">00</div>
-                <div class="time-label">دقيقة</div>
-            </div>
-            <div class="time-box">
-                <div class="time-number" id="seconds">00</div>
-                <div class="time-label">ثانية</div>
-            </div>
-        </div>
-
-        <!-- المعرض بنقاط التنقل -->
-        <div class="slider-container">
-            <img id="currentImage" class="slide-img" src="baby_combine.png" alt="صورة العروسين">
-            <div class="dots-container">
-                <span class="dot active" onclick="goToSlide(0, event)"></span>
-                <span class="dot" onclick="goToSlide(1, event)"></span>
-                <span class="dot" onclick="goToSlide(2, event)"></span>
-                <span class="dot" onclick="goToSlide(3, event)"></span>
-            </div>
-        </div>
-
-        <!-- الصوت -->
-        <audio id="weddingMusic" loop>
-            <source src="Music.mp3" type="audio/mpeg">
-        </audio>
-
-        <!-- التفاصيل -->
-        <div class="details">
-            <h3>🗓️ التاريخ والزمان</h3>
-            <p>الخميس، 31 ديسمبر 2026</p>
-            <p>من الساعة 2 ظهراً إلى الساعة 6 مساءً</p>
-            
-            <h3 style="margin-top: 20px;">📍 قاعات جرين و كريستال للحفلات</h3>
-            
-            <a href="https://maps.app.goo.gl/FuwWFoWyjxLFKwdWA" target="_blank" class="map-btn">📍 افتح اللوكيشن على الخريطة</a>
-        </div>
-
-        <div class="footer">
-            حضوركم يسعدنا وتكتمل به فرحتنا! ❤️
-        </div>
-    </div>
-
-    <script>
-        function openEnvelope() {
-            // تأثير حركة فتح الجواب
-            const env = document.getElementById('envelopeScreen');
-            env.classList.add('opened');
-            
-            setTimeout(() => {
-                document.getElementById('mainContent').classList.add('visible');
-            }, 300);
-
-            // إطلاق الزخات الملونة الاحتفالية (Confetti)
-            if (typeof confetti === 'function') {
-                confetti({
-                    particleCount: 80,
-                    spread: 70,
-                    origin: { y: 0.6 },
-                    colors: ['#d4af37', '#8a1c2e', '#8b5a2b', '#ffffff']
-                });
-            }
-
-            // تشغيل الصوت
-            var music = document.getElementById('weddingMusic');
-            if (music) {
-                music.play().catch(function(e) { console.log(e); });
-            }
-        }
-
-        // معرض الصور
-        const images = ["baby_combine.png", "image_1.png", "image_2.png", "image_4.png"];
-        let currentIndex = 0;
-
-        function goToSlide(index, e) {
-            if (e) e.stopPropagation();
-            currentIndex = index;
-            document.getElementById('currentImage').src = images[currentIndex];
-            
-            const dots = document.querySelectorAll('.dot');
-            dots.forEach((dot, idx) => {
-                dot.classList.toggle('active', idx === currentIndex);
-            });
-        }
-
-        // العداد التنازلي
-        const eventDate = new Date('December 31, 2026 14:00:00').getTime();
-
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const difference = eventDate - now;
-
-            if (difference > 0) {
-                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-                document.getElementById('days').innerText = days < 10 ? '0' + days : days;
-                document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
-                document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
-                document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
-            } else {
-                document.getElementById('days').innerText = "00";
-                document.getElementById('hours').innerText = "00";
-                document.getElementById('minutes').innerText = "00";
-                document.getElementById('seconds').innerText = "00";
-            }
-        }
-
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
-    </script>
-
-</body>
-</html>
+            <div style="color: #666; margin-bottom: 5px;">
