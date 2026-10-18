@@ -32,7 +32,7 @@
             padding: 10px;
         }
 
-        /* شاشة الغلاف التفاعلي (الظرف) */
+        /* شاشة الجواب التفاعلي (الظرف المغلق) */
         .envelope-screen {
             position: fixed;
             top: 0;
@@ -99,7 +99,7 @@
             100% { transform: scale(1); box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); }
         }
 
-        /* محتوى الدعوة الرئيسي */
+        /* محتوى الدعوة الرئيسي (الداخل) */
         .main-content {
             max-width: 600px;
             width: 100%;
@@ -146,24 +146,7 @@
             font-style: italic;
         }
 
-        .content-image {
-            width: 100%;
-            margin: 20px 0;
-            border-radius: 12px;
-            overflow: hidden;
-            background: #faf6f0;
-            padding: 10px;
-        }
-
-        .content-image img {
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-            border-radius: 8px;
-            display: block;
-        }
-
-        /* معرض الصور التفاعلي (Slider) */
+        /* معرض الصور التفاعلي بالداخل */
         .slider-container {
             position: relative;
             width: 100%;
@@ -190,18 +173,17 @@
 
         .slide img {
             max-width: 100%;
-            max-height: 400px;
+            max-height: 420px;
             height: auto;
             object-fit: contain;
             border-radius: 10px;
         }
 
-        /* أسهم التبديل */
         .slider-btn {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(139, 90, 43, 0.7);
+            background: rgba(139, 90, 43, 0.75);
             color: white;
             border: none;
             width: 40px;
@@ -220,10 +202,9 @@
             background: var(--primary-color);
         }
 
-        .prev-btn { right: 15px; }
-        .next-btn { left: 15px; }
+        .prev-btn { right: 12px; }
+        .next-btn { left: 12px; }
 
-        /* نقاط المؤشر السفلية */
         .dots-container {
             display: flex;
             justify-content: center;
@@ -288,7 +269,7 @@
 </head>
 <body>
 
-    <!-- شاشة الغلاف التفاعلي (الظرف) -->
+    <!-- شاشة الجواب التفاعلي الأولية (الظرف المغلق) -->
     <div class="envelope-screen" id="envelopeScreen" onclick="openInvitation()">
         <div class="envelope-card">
             <img src="image_2.png" alt="غلاف الدعوة">
@@ -296,7 +277,7 @@
         </div>
     </div>
 
-    <!-- محتوى الدعوة الأساسي -->
+    <!-- محتوى الدعوة من الداخل (يفتح بعد الضغط على الجواب) -->
     <div class="main-content" id="mainContent">
         <h1 class="header-title">دعوة كتب كتاب</h1>
         
@@ -306,36 +287,12 @@
 
         <p style="font-size: 1.2rem;">يتشرفان بدعوتكم لمشاركتهما فرحة عقد قرانهما</p>
 
-        <!-- الصورة الرئيسية -->
-        <div class="content-image">
-            <img src="baby_combine.png" alt="صورة العروسين">
-        </div>
-
-        <!-- مشغل الصوت -->
-        <audio id="weddingMusic" loop>
-            <source src="Music.mp3" type="audio/mpeg">
-            متصفحك لا يدعم تشغيل الصوت.
-        </audio>
-
-        <!-- تفاصيل الموعد والمكان -->
-        <div class="details">
-            <h3>🗓️ التاريخ والزمان</h3>
-            <p>الخميس، 31 ديسمبر 2026</p>
-            <p>الساعة السابعة مساءً</p>
-            
-            <h3 style="margin-top: 15px;">📍 مكان الفرح</h3>
-            <p>قاعة الاحتفالات</p>
-            <p style="font-size: 1rem; color: #666;">الرياض، المملكة العربية السعودية</p>
-            
-            <a href="https://maps.google.com" target="_blank" class="map-btn">📍 افتح اللوكيشن على الخريطة</a>
-        </div>
-
-        <!-- معرض الصور التفاعلي (تغيير الصور) -->
-        <h3>أجمل اللحظات</h3>
+        <!-- معرض جميع الصور بالداخل لتبديلها وتصفحها -->
         <div class="slider-container">
             <button class="slider-btn prev-btn" onclick="prevSlide()">❮</button>
             <button class="slider-btn next-btn" onclick="nextSlide()">❯</button>
             <div class="slider-wrapper" id="sliderWrapper">
+                <div class="slide"><img src="baby_combine.png" alt="صورة العروسين"></div>
                 <div class="slide"><img src="image_1.png" alt="صورة 1"></div>
                 <div class="slide"><img src="image_2.png" alt="صورة 2"></div>
                 <div class="slide"><img src="image_4.png" alt="صورة 4"></div>
@@ -344,7 +301,26 @@
                 <span class="dot active" onclick="goToSlide(0)"></span>
                 <span class="dot" onclick="goToSlide(1)"></span>
                 <span class="dot" onclick="goToSlide(2)"></span>
+                <span class="dot" onclick="goToSlide(3)"></span>
             </div>
+        </div>
+
+        <!-- مشغل الصوت -->
+        <audio id="weddingMusic" loop>
+            <source src="Music.mp3" type="audio/mpeg">
+            متصفحك لا يدعم تشغيل الصوت.
+        </audio>
+
+        <!-- تفاصيل الموعد والمكان واللوكيشن -->
+        <div class="details">
+            <h3>🗓️ التاريخ والزمان</h3>
+            <p>الخميس، 31 ديسمبر 2026</p>
+            <p>من الساعة 2 ظهراً إلى الساعة 6 مساءً</p>
+            
+            <h3 style="margin-top: 15px;">📍 مكان الفرح</h3>
+            <p>قاعات جرين و كريستال للحفلات</p>
+            
+            <a href="https://share.google/0KozlxnkGJHi5FVg9" target="_blank" class="map-btn">📍 افتح اللوكيشن على الخريطة</a>
         </div>
 
         <div class="footer">
@@ -364,7 +340,7 @@
 
         // كود التحكم في سلايدر الصور
         let currentSlide = 0;
-        const totalSlides = 3;
+        const totalSlides = 4;
 
         function updateSlider() {
             const wrapper = document.getElementById('sliderWrapper');
