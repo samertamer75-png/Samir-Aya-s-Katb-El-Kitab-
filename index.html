@@ -9,7 +9,7 @@
         :root {
             --primary-color: #8b5a2b;
             --secondary-color: #d4af37;
-            --bg-color: #fdfbf7;
+            --bg-color: #f5f0eb;
             --card-bg: #ffffff;
             --text-color: #333333;
         }
@@ -25,18 +25,102 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             text-align: center;
-            line-height: 1.8;
-            padding: 20px 10px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
         }
 
-        .container {
-            max-width: 650px;
-            margin: 0 auto;
+        /* حاوية الغلاف التفاعلي (الظرف) */
+        .envelope-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+            padding: 20px;
+        }
+
+        .envelope-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .envelope-card {
             background: var(--card-bg);
-            padding: 35px 20px;
+            max-width: 450px;
+            width: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            border: 2px solid var(--secondary-color);
+            cursor: pointer;
+            text-align: center;
+            animation: pulse-glow 2s infinite;
+        }
+
+        .envelope-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        .open-btn {
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.3rem;
+            font-family: 'Reem Kufi', sans-serif;
+            border-radius: 30px;
+            margin: 20px 0;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: background 0.3s;
+        }
+
+        .open-btn:hover {
+            background-color: var(--secondary-color);
+            color: #fff;
+        }
+
+        @keyframes pulse-glow {
+            0% { transform: scale(1); box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); }
+            50% { transform: scale(1.02); box-shadow: 0 0 25px rgba(212, 175, 55, 0.7); }
+            100% { transform: scale(1); box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); }
+        }
+
+        /* محتوى الدعوة الرئيسي (مخفي حتى يتم فتح الظرف) */
+        .main-content {
+            max-width: 600px;
+            width: 100%;
+            background: var(--card-bg);
+            padding: 30px 20px;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             border: 2px solid #f1e5d1;
+            margin: 20px auto;
+            display: none; /* مخفي في البداية */
+        }
+
+        .main-content.visible {
+            display: block;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         h1, h2, h3 {
@@ -47,7 +131,6 @@
         .header-title {
             font-size: 2.2rem;
             margin-bottom: 10px;
-            color: var(--primary-color);
         }
 
         .names {
@@ -55,58 +138,41 @@
             color: var(--secondary-color);
             margin: 15px 0;
             font-weight: bold;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
 
         .verse {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             color: #555;
-            margin: 20px 0;
+            margin: 15px 0;
             font-style: italic;
         }
 
-        /* تنسيق الصور لضمان عدم القص وظهور الصورة كاملة */
-        .image-container {
+        .content-image {
             width: 100%;
             margin: 20px 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #faf6f0;
-            border-radius: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #faf6f0;
             padding: 10px;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.02);
         }
 
-        img {
-            max-width: 100%;
-            max-height: 450px;
+        .content-image img {
+            width: 100%;
             height: auto;
-            width: auto;
-            object-fit: contain; /* يضمن إظهار الصورة بالكامل دون قَطْع */
-            border-radius: 12px;
+            object-fit: contain;
+            border-radius: 8px;
             display: block;
-            margin: 0 auto;
         }
 
         .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 15px;
             margin: 25px 0;
         }
 
-        .gallery .image-container {
-            margin: 0;
-            height: 220px;
-        }
-
-        .gallery img {
-            max-height: 200px;
-        }
-
         .details {
-            margin: 30px 0;
+            margin: 25px 0;
             padding: 20px;
             background: #fdf8f2;
             border-radius: 12px;
@@ -118,54 +184,45 @@
             margin: 8px 0;
         }
 
-        .audio-player {
-            margin: 25px 0;
-        }
-
-        audio {
-            width: 100%;
-            max-width: 400px;
-            outline: none;
-        }
-
         .footer {
-            margin-top: 30px;
+            margin-top: 25px;
             font-size: 1.1rem;
             color: var(--primary-color);
             font-weight: bold;
-        }
-
-        @media (max-width: 480px) {
-            .header-title { font-size: 1.8rem; }
-            .names { font-size: 2rem; }
-            .container { padding: 20px 12px; }
-            .gallery { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
+    <!-- شاشة الغلاف التفاعلي (الظرف المغلق) -->
+    <div class="envelope-screen" id="envelopeScreen" onclick="openInvitation()">
+        <div class="envelope-card">
+            <!-- يمكنك استخدام image_2.png كصورة الغلاف أو الظرف -->
+            <img src="image_2.png" alt="غلاف الدعوة">
+            <button class="open-btn">Tap to open</button>
+        </div>
+    </div>
+
+    <!-- محتوى الدعوة الأساسي (يظهر بعد الفتح وتعمل الموسيقى) -->
+    <div class="main-content" id="mainContent">
         <h1 class="header-title">دعوة كتب كتاب</h1>
         
         <p class="verse">"وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً"</p>
 
         <div class="names">سمير & آية</div>
 
-        <p style="font-size: 1.3rem;">يتشرفان بدعوتكم لمشاركتهما فرحة عقد قرانهما</p>
+        <p style="font-size: 1.2rem;">يتشرفان بدعوتكم لمشاركتهما فرحة عقد قرانهما</p>
 
         <!-- الصورة الرئيسية -->
-        <div class="image-container">
-            <img src="baby_combine.png" alt="صورة مميزة">
+        <div class="content-image">
+            <img src="baby_combine.png" alt="صورة العروسين">
         </div>
 
-        <!-- مشغل الصوت -->
-        <div class="audio-player">
-            <audio controls autoplay loop>
-                <source src="Music.mp3" type="audio/mpeg">
-                متصفحك لا يدعم تشغيل الصوت.
-            </audio>
-        </div>
+        <!-- مشغل الصوت (يعمل تلقائياً عند فتح الظرف) -->
+        <audio id="weddingMusic" loop>
+            <source src="Music.mp3" type="audio/mpeg">
+            متصفحك لا يدعم تشغيل الصوت.
+        </audio>
 
         <!-- تفاصيل الموعد والمكان -->
         <div class="details">
@@ -177,15 +234,8 @@
         <!-- معرض الصور المتبقية -->
         <h3>أجمل اللحظات</h3>
         <div class="gallery">
-            <div class="image-container">
-                <img src="image_1.png" alt="صورة 1">
-            </div>
-            <div class="image-container">
-                <img src="image_2.png" alt="صورة 2">
-            </div>
-            <div class="image-container">
-                <img src="image_4.png" alt="صورة 4">
-            </div>
+            <div class="content-image"><img src="image_1.png" alt="صورة 1"></div>
+            <div class="content-image"><img src="image_4.png" alt="صورة 4"></div>
         </div>
 
         <div class="footer">
@@ -193,5 +243,20 @@
         </div>
     </div>
 
+    <script>
+        function openInvitation() {
+            // إخفاء شاشة الغلاف
+            document.getElementById('envelopeScreen').classList.add('hidden');
+            // إظهار محتوى الدعوة
+            document.getElementById('mainContent').classList.add('visible');
+            // تشغيل الموسيقى بعد الضغط
+            var music = document.getElementById('weddingMusic');
+            music.play().catch(function(error) {
+                console.log("Audio autoplay prevented by browser:", error);
+            });
+        }
+    </script>
+
 </body>
 </html>
+
