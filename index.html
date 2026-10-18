@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>دعوة كتب كتاب - سمير وآية</title>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Reem+Kufi:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-color: #8b5a2b;
@@ -21,7 +20,7 @@
         }
 
         body {
-            font-family: 'Amiri', serif;
+            font-family: 'Traditional Arabic', 'Amiri', 'Segoe UI', Tahoma, sans-serif;
             background-color: var(--bg-color);
             color: #333;
             text-align: center;
@@ -32,7 +31,7 @@
             padding: 15px;
         }
 
-        /* ===== شاشة الظرف المغلق (البداية) ===== */
+        /* ===== شاشة الظرف المغلق ===== */
         .envelope-screen {
             position: fixed;
             top: 0;
@@ -45,45 +44,39 @@
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            transition: opacity 0.8s ease, visibility 0.8s ease;
             padding: 20px;
             cursor: pointer;
         }
 
         .envelope-screen.hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
+            display: none !important;
         }
 
-        /* البطاقة الرئيسية للغطاء */
         .invitation-card {
             background-color: var(--card-bg);
             width: 100%;
-            max-width: 420px;
-            padding: 35px 25px 30px;
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            max-width: 400px;
+            padding: 30px 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border: 2px solid var(--secondary-color);
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
         .invited-text {
-            font-family: 'Reem Kufi', sans-serif;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: var(--text-dark);
             margin-bottom: 5px;
         }
 
-        /* الأسماء تحت بعض بخط كبير */
         .couple-names-ar {
-            font-family: 'Reem Kufi', sans-serif;
             font-size: 2.8rem;
             color: var(--text-dark);
-            font-weight: 700;
+            font-weight: bold;
             line-height: 1.2;
-            margin: 10px 0;
+            margin: 15px 0;
         }
 
         .couple-names-ar span {
@@ -91,131 +84,77 @@
         }
 
         .and-symbol-ar {
-            font-size: 1.8rem;
+            font-size: 2rem;
             color: var(--secondary-color);
-            margin: 2px 0;
         }
 
         .sub-header {
-            font-family: 'Reem Kufi', sans-serif;
-            font-size: 1rem;
+            font-size: 1.1rem;
             color: #8c726a;
             margin-bottom: 20px;
         }
 
-        /* رسم الظرف الشمعي */
         .envelope-box {
             position: relative;
             width: 100%;
-            max-width: 320px;
-            height: 170px;
+            max-width: 280px;
+            height: 150px;
             background: #ede6dd;
-            border-radius: 6px;
+            border-radius: 8px;
             border: 1px solid #dcd3c8;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
-        /* طية الظرف */
-        .envelope-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            margin: 0 auto;
-            width: 0;
-            height: 0;
-            border-left: 160px solid transparent;
-            border-right: 160px solid transparent;
-            border-top: 95px solid #f2ece4;
-        }
-
-        /* الختم الشمعي */
         .wax-seal {
-            position: relative;
-            z-index: 5;
-            width: 70px;
-            height: 70px;
-            background: radial-gradient(circle, #8a1c2e 0%, #5c101c 100%);
+            width: 65px;
+            height: 65px;
+            background: #8a1c2e;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: rgba(255,255,255,0.85);
-            font-family: 'Reem Kufi', sans-serif;
-            font-size: 1.1rem;
-            font-weight: bold;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
-            border: 2px solid #4a0d17;
-        }
-
-        .quote-1 {
-            font-family: 'Amiri', serif;
-            font-size: 1.1rem;
-            color: #777;
-            margin-bottom: 4px;
-        }
-
-        .quote-2 {
-            font-family: 'Reem Kufi', sans-serif;
-            font-weight: 700;
+            color: #ffffff;
             font-size: 1.2rem;
-            color: var(--text-dark);
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            border: 2px solid #5c101c;
         }
 
         .tap-to-open {
-            margin-top: 18px;
-            font-family: 'Reem Kufi', sans-serif;
+            margin-top: 15px;
             font-size: 1.2rem;
+            font-weight: bold;
             color: var(--text-dark);
-            animation: fadeInOut 2s infinite;
         }
 
-        @keyframes fadeInOut {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
-        }
-
-        /* ===== محتوى الدعوة من الداخل ===== */
+        /* ===== محتوى الدعوة الداخلي ===== */
         .main-content {
-            max-width: 600px;
+            max-width: 550px;
             width: 100%;
             background: #ffffff;
             padding: 30px 20px;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             border: 2px solid #f1e5d1;
             margin: 20px auto;
             display: none;
         }
 
         .main-content.visible {
-            display: block;
-            animation: fadeIn 1s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        h1, h2, h3 {
-            font-family: 'Reem Kufi', sans-serif;
-            color: var(--primary-color);
+            display: block !important;
         }
 
         .header-title {
             font-size: 2.2rem;
+            color: var(--primary-color);
             margin-bottom: 10px;
         }
 
         .names-ar-inside {
-            font-family: 'Reem Kufi', sans-serif;
-            font-size: 3.2rem;
+            font-size: 3rem;
             color: var(--secondary-color);
             margin: 15px 0;
             font-weight: bold;
@@ -229,95 +168,181 @@
         .and-symbol-inside {
             font-size: 2rem;
             color: var(--primary-color);
-            margin: 5px 0;
         }
 
         .verse {
-            font-size: 1.15rem;
+            font-size: 1.2rem;
             color: #555;
             margin: 15px 0;
             font-style: italic;
         }
 
-        /* معرض الصور بالداخل */
+        /* معرض الصور بسيط ومضمون */
         .slider-container {
             position: relative;
             width: 100%;
             margin: 25px 0;
             overflow: hidden;
-            border-radius: 15px;
+            border-radius: 12px;
             background: #faf6f0;
             padding: 10px;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.03);
-            direction: ltr; /* إصلاح حركة الصور */
         }
 
-        .slider-wrapper {
-            display: flex;
-            transition: transform 0.4s ease-in-out;
+        .slide-img {
             width: 100%;
-        }
-
-        .slide {
-            min-width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .slide img {
-            max-width: 100%;
-            max-height: 420px;
-            height: auto;
+            max-height: 400px;
             object-fit: contain;
             border-radius: 10px;
         }
 
+        .slider-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
         .slider-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(139, 90, 43, 0.75);
+            background: var(--primary-color);
             color: white;
             border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+            padding: 8px 20px;
+            border-radius: 20px;
             cursor: pointer;
-            font-size: 1.2rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 10;
-        }
-
-        .prev-btn { left: 12px; }
-        .next-btn { right: 12px; }
-
-        .dots-container {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 10px;
-            direction: rtl;
-        }
-
-        .dot {
-            width: 10px;
-            height: 10px;
-            background-color: #ccc;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-
-        .dot.active {
-            background-color: var(--secondary-color);
-            width: 12px;
-            height: 12px;
+            font-size: 1rem;
         }
 
         .details {
             margin: 25px 0;
             padding: 20px;
             background: #fdf8f2;
-            border-radius:
+            border-radius: 12px;
+            border-right: 5px solid var(--secondary-color);
+            text-align: right;
+        }
+
+        .details p {
+            font-size: 1.2rem;
+            margin: 8px 0;
+        }
+
+        .map-btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: #fff;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            border-radius: 25px;
+            text-decoration: none;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .footer {
+            margin-top: 25px;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- غلاف الدعوة -->
+    <div class="envelope-screen" id="envelopeScreen" onclick="openEnvelope()">
+        <div class="invitation-card">
+            <div class="invited-text">يسرنا دعوتكم لحضور حفل</div>
+            
+            <div class="couple-names-ar">
+                <span>سمير</span>
+                <span class="and-symbol-ar">&</span>
+                <span>آية</span>
+            </div>
+
+            <div class="sub-header">عقد قران</div>
+
+            <div class="envelope-box">
+                <div class="wax-seal">س & آ</div>
+            </div>
+
+            <div style="color: #666; margin-bottom: 5px;">بداية فصل جديد من العمر</div>
+            <div style="font-weight: bold; color: var(--text-dark);">تكتمل بحضوركم</div>
+        </div>
+        
+        <div class="tap-to-open">اضغط في أي مكان لفتح الدعوة ✉️</div>
+    </div>
+
+    <!-- محتوى الدعوة من الداخل -->
+    <div class="main-content" id="mainContent">
+        <h1 class="header-title">دعوة كتب كتاب</h1>
+        
+        <p class="verse">"وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً"</p>
+
+        <div class="names-ar-inside">
+            <span>سمير</span>
+            <span class="and-symbol-inside">&</span>
+            <span>آية</span>
+        </div>
+
+        <p style="font-size: 1.2rem;">يتشرفان بدعوتكم لمشاركتهما فرحة عقد قرانهما</p>
+
+        <!-- المعرض -->
+        <div class="slider-container">
+            <img id="currentImage" class="slide-img" src="baby_combine.png" alt="صورة العروسين">
+            <div class="slider-controls">
+                <button class="slider-btn" onclick="prevImg(event)">السابقة ❮</button>
+                <button class="slider-btn" onclick="nextImg(event)">التالية ❯</button>
+            </div>
+        </div>
+
+        <!-- الصوت -->
+        <audio id="weddingMusic" loop>
+            <source src="Music.mp3" type="audio/mpeg">
+        </audio>
+
+        <!-- التفاصيل -->
+        <div class="details">
+            <h3>🗓️ التاريخ والزمان</h3>
+            <p>الخميس، 31 ديسمبر 2026</p>
+            <p>من الساعة 2 ظهراً إلى الساعة 6 مساءً</p>
+            
+            <h3 style="margin-top: 15px;">📍 مكان الفرح</h3>
+            <p>قاعات جرين و كريستال للحفلات</p>
+            
+            <a href="https://maps.app.goo.gl/FuwWFoWyjxLFKwdWA" target="_blank" class="map-btn">📍 افتح اللوكيشن على الخريطة</a>
+        </div>
+
+        <div class="footer">
+            حضوركم يسعدنا وتكتمل به فرحتنا! ❤️
+        </div>
+    </div>
+
+    <script>
+        function openEnvelope() {
+            document.getElementById('envelopeScreen').classList.add('hidden');
+            document.getElementById('mainContent').classList.add('visible');
+            var music = document.getElementById('weddingMusic');
+            if (music) {
+                music.play().catch(function(e) { console.log(e); });
+            }
+        }
+
+        // الصور
+        const images = ["baby_combine.png", "image_1.png", "image_2.png", "image_4.png"];
+        let currentIndex = 0;
+
+        function nextImg(e) {
+            if(e) e.stopPropagation();
+            currentIndex = (currentIndex + 1) % images.length;
+            document.getElementById('currentImage').src = images[currentIndex];
+        }
+
+        function prevImg(e) {
+            if(e) e.stopPropagation();
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            document.getElementById('currentImage').src = images[currentIndex];
+        }
+    </script>
+
+</body>
+</html>
