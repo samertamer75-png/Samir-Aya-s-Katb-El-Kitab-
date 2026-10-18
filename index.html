@@ -66,9 +66,10 @@
         }
 
         .invited-text {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             color: var(--text-dark);
             margin-bottom: 5px;
+            line-height: 1.5;
         }
 
         .couple-names-ar {
@@ -88,12 +89,6 @@
             color: var(--secondary-color);
         }
 
-        .sub-header {
-            font-size: 1.1rem;
-            color: #8c726a;
-            margin-bottom: 20px;
-        }
-
         .envelope-box {
             position: relative;
             width: 100%;
@@ -105,10 +100,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 20px;
+            margin: 15px 0 20px 0;
         }
 
-        /* الختم الشمعي بدون أي كتابة */
         .wax-seal {
             width: 65px;
             height: 65px;
@@ -151,7 +145,7 @@
         .names-ar-inside {
             font-size: 3rem;
             color: var(--secondary-color);
-            margin: 15px 0;
+            margin: 15px 0 5px 0;
             font-weight: bold;
             line-height: 1.2;
         }
@@ -165,6 +159,13 @@
             color: var(--primary-color);
         }
 
+        .event-sub-tag {
+            font-size: 1.6rem;
+            color: var(--text-dark);
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
         .verse {
             font-size: 1.2rem;
             color: #555;
@@ -172,7 +173,38 @@
             font-style: italic;
         }
 
-        /* معرض الصور مع نقاط التنقل */
+        /* العداد التنازلي */
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 20px 0;
+            direction: ltr;
+        }
+
+        .time-box {
+            background: #fdf8f2;
+            border: 1px solid var(--secondary-color);
+            border-radius: 10px;
+            padding: 10px 12px;
+            min-width: 65px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+        }
+
+        .time-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text-dark);
+        }
+
+        .time-label {
+            font-size: 0.85rem;
+            color: #777;
+            margin-top: 2px;
+            direction: rtl;
+        }
+
+        /* معرض الصور */
         .slider-container {
             position: relative;
             width: 100%;
@@ -252,15 +284,13 @@
     <!-- غلاف الدعوة -->
     <div class="envelope-screen" id="envelopeScreen" onclick="openEnvelope()">
         <div class="invitation-card">
-            <div class="invited-text">يسرنا دعوتكم لحضور حفل</div>
+            <div class="invited-text">يسرنا دعوتكم لحضور حفل كتب كتاب</div>
             
             <div class="couple-names-ar">
                 <span>سمير</span>
                 <span class="and-symbol-ar">&</span>
                 <span>آية</span>
             </div>
-
-            <div class="sub-header">عقد قران</div>
 
             <div class="envelope-box">
                 <div class="wax-seal"></div>
@@ -285,7 +315,29 @@
             <span>آية</span>
         </div>
 
+        <div class="event-sub-tag">كتب الكتاب</div>
+
         <p style="font-size: 1.2rem;">يتشرفان بدعوتكم لمشاركتهما فرحة عقد قرانهما</p>
+
+        <!-- العداد التنازلي -->
+        <div class="countdown-container">
+            <div class="time-box">
+                <div class="time-number" id="days">00</div>
+                <div class="time-label">يوم</div>
+            </div>
+            <div class="time-box">
+                <div class="time-number" id="hours">00</div>
+                <div class="time-label">ساعة</div>
+            </div>
+            <div class="time-box">
+                <div class="time-number" id="minutes">00</div>
+                <div class="time-label">دقيقة</div>
+            </div>
+            <div class="time-box">
+                <div class="time-number" id="seconds">00</div>
+                <div class="time-label">ثانية</div>
+            </div>
+        </div>
 
         <!-- المعرض بنقاط التنقل -->
         <div class="slider-container">
@@ -343,6 +395,34 @@
                 dot.classList.toggle('active', idx === currentIndex);
             });
         }
+
+        // كود العداد التنازلي المباشر
+        const eventDate = new Date('December 31, 2026 14:00:00').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const difference = eventDate - now;
+
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                document.getElementById('days').innerText = days < 10 ? '0' + days : days;
+                document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
+                document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
+                document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
+            } else {
+                document.getElementById('days').innerText = "00";
+                document.getElementById('hours').innerText = "00";
+                document.getElementById('minutes').innerText = "00";
+                document.getElementById('seconds').innerText = "00";
+            }
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
     </script>
 
 </body>
