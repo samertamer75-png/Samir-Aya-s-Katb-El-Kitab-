@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Samir & AYA - Wedding Invitation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Reem+Kufi:wght@400;600&display=swap" rel="stylesheet">
+    <title>دعوة كتب كتاب - سمير وآية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Reem+Kufi:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-color: #8b5a2b;
@@ -61,7 +61,7 @@
             background-color: var(--card-bg);
             width: 100%;
             max-width: 420px;
-            padding: 40px 25px 30px;
+            padding: 35px 25px 30px;
             border-radius: 8px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
             display: flex;
@@ -70,29 +70,38 @@
         }
 
         .invited-text {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
+            font-family: 'Reem Kufi', sans-serif;
+            font-size: 1.2rem;
             color: var(--text-dark);
-            margin-bottom: 8px;
+            margin-bottom: 5px;
         }
 
-        .couple-names {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
-            font-style: italic;
+        /* الأسماء تحت بعض بخط كبير في الغلاف بالعربي */
+        .couple-names-ar {
+            font-family: 'Reem Kufi', sans-serif;
+            font-size: 2.8rem;
             color: var(--text-dark);
             font-weight: 700;
-            margin-bottom: 12px;
-            direction: ltr;
+            line-height: 1.2;
+            margin: 10px 0;
+        }
+
+        .couple-names-ar span {
+            display: block;
+        }
+
+        .and-symbol-ar {
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+            margin: 2px 0;
         }
 
         .sub-header {
-            font-family: 'Playfair Display', serif;
-            font-size: 0.85rem;
-            letter-spacing: 2px;
+            font-family: 'Reem Kufi', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 1px;
             color: #8c726a;
-            text-transform: uppercase;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         /* رسم الظرف الشمعي */
@@ -100,7 +109,7 @@
             position: relative;
             width: 100%;
             max-width: 320px;
-            height: 180px;
+            height: 170px;
             background: #ede6dd;
             border-radius: 6px;
             border: 1px solid #dcd3c8;
@@ -108,7 +117,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         /* طية الظرف */
@@ -123,7 +132,7 @@
             height: 0;
             border-left: 160px solid transparent;
             border-right: 160px solid transparent;
-            border-top: 100px solid #f2ece4;
+            border-top: 95px solid #f2ece4;
         }
 
         /* الختم الشمعي */
@@ -137,33 +146,32 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            color: rgba(255,255,255,0.7);
-            font-family: 'Playfair Display', serif;
-            font-size: 1rem;
+            color: rgba(255,255,255,0.85);
+            font-family: 'Reem Kufi', sans-serif;
+            font-size: 1.1rem;
             font-weight: bold;
             box-shadow: 0 6px 15px rgba(0,0,0,0.3);
             border: 2px solid #4a0d17;
         }
 
         .quote-1 {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: 0.95rem;
-            color: #888;
+            font-family: 'Amiri', serif;
+            font-size: 1.1rem;
+            color: #777;
             margin-bottom: 4px;
         }
 
         .quote-2 {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Reem Kufi', sans-serif;
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             color: var(--text-dark);
         }
 
         .tap-to-open {
-            margin-top: 20px;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
+            margin-top: 18px;
+            font-family: 'Reem Kufi', sans-serif;
+            font-size: 1.2rem;
             color: var(--text-dark);
             letter-spacing: 1px;
             animation: fadeInOut 2s infinite;
@@ -207,13 +215,25 @@
             margin-bottom: 10px;
         }
 
-        .names {
+        /* الأسماء بالإنجليزية بالداخل تحت بعض وبخط كبير */
+        .names-en {
             font-family: 'Playfair Display', serif;
-            font-size: 2.8rem;
+            font-size: 3.2rem;
             color: var(--secondary-color);
             margin: 15px 0;
             font-weight: bold;
+            line-height: 1.2;
             direction: ltr;
+        }
+
+        .names-en span {
+            display: block;
+        }
+
+        .and-symbol-en {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin: 5px 0;
         }
 
         .verse {
@@ -316,13 +336,18 @@
             display: inline-block;
             background-color: var(--secondary-color);
             color: #fff;
-            padding: 10px 25px;
+            padding: 12px 28px;
             font-size: 1.1rem;
             font-family: 'Reem Kufi', sans-serif;
             border-radius: 25px;
             text-decoration: none;
             margin-top: 15px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: background 0.3s;
+        }
+
+        .map-btn:hover {
+            background-color: var(--primary-color);
         }
 
         .footer {
@@ -338,43 +363,56 @@
                 border-right-width: 130px;
                 border-top-width: 80px;
             }
+            .couple-names-ar { font-size: 2.3rem; }
+            .names-en { font-size: 2.6rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- شاشة الظرف المغلق في البداية -->
+    <!-- شاشة الظرف المغلق في البداية (بالعربي) -->
     <div class="envelope-screen" id="envelopeScreen">
         <div class="invitation-card">
-            <div class="invited-text">You are invited to</div>
-            <div class="couple-names">Samir & AYA</div>
-            <div class="sub-header">Wedding Celebration</div>
-
-            <div class="envelope-box">
-                <div class="wax-seal">S & A</div>
+            <div class="invited-text">يسرنا دعوتكم لحضور حفل</div>
+            
+            <div class="couple-names-ar">
+                <span>سمير</span>
+                <span class="and-symbol-ar">&</span>
+                <span>آية</span>
             </div>
 
-            <div class="quote-1">The first chapter of forever</div>
-            <div class="quote-2">begins with you.</div>
+            <div class="sub-header">عقد قران</div>
+
+            <div class="envelope-box">
+                <div class="wax-seal">س & آ</div>
+            </div>
+
+            <div class="quote-1">بداية فصل جديد من العمر</div>
+            <div class="quote-2">تكتمل بحضوركم</div>
         </div>
         
-        <div class="tap-to-open">Tap to open</div>
+        <div class="tap-to-open">اضغط لفتح الدعوة ✉️</div>
     </div>
 
-    <!-- محتوى الدعوة من الداخل -->
+    <!-- محتوى الدعوة من الداخل (بالإنجليزية للأسماء) -->
     <div class="main-content" id="mainContent">
         <h1 class="header-title">دعوة كتب كتاب</h1>
         
         <p class="verse">"وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً"</p>
 
-        <div class="names">Samir & AYA</div>
+        <!-- الأسماء تحت بعض بالإنجليزية بخط كبير -->
+        <div class="names-en">
+            <span>Samir</span>
+            <span class="and-symbol-en">&</span>
+            <span>AYA</span>
+        </div>
 
         <p style="font-size: 1.2rem;">يتشرفان بدعوتكم لمشاركتهما فرحة عقد قرانهما</p>
 
         <!-- معرض الصور بالداخل -->
         <div class="slider-container">
-            <button class="slider-btn prev-btn" onclick="prevSlide()">❮</button>
-            <button class="slider-btn next-btn" onclick="nextSlide()">❯</button>
+            <button class="slider-btn prev-btn" onclick="prevSlide(event)">❮</button>
+            <button class="slider-btn next-btn" onclick="nextSlide(event)">❯</button>
             <div class="slider-wrapper" id="sliderWrapper">
                 <div class="slide"><img src="baby_combine.png" alt="صورة العروسين"></div>
                 <div class="slide"><img src="image_1.png" alt="صورة 1"></div>
@@ -382,10 +420,10 @@
                 <div class="slide"><img src="image_4.png" alt="صورة 4"></div>
             </div>
             <div class="dots-container" id="dotsContainer">
-                <span class="dot active" onclick="goToSlide(0)"></span>
-                <span class="dot" onclick="goToSlide(1)"></span>
-                <span class="dot" onclick="goToSlide(2)"></span>
-                <span class="dot" onclick="goToSlide(3)"></span>
+                <span class="dot active" onclick="goToSlide(0, event)"></span>
+                <span class="dot" onclick="goToSlide(1, event)"></span>
+                <span class="dot" onclick="goToSlide(2, event)"></span>
+                <span class="dot" onclick="goToSlide(3, event)"></span>
             </div>
         </div>
 
@@ -395,7 +433,7 @@
             متصفحك لا يدعم تشغيل الصوت.
         </audio>
 
-        <!-- تفاصيل الموعد والمكان واللوكيشن -->
+        <!-- تفاصيل الموعد والمكان واللوكيشن الصحيح -->
         <div class="details">
             <h3>🗓️ التاريخ والزمان</h3>
             <p>الخميس، 31 ديسمبر 2026</p>
@@ -404,7 +442,7 @@
             <h3 style="margin-top: 15px;">📍 مكان الفرح</h3>
             <p>قاعات جرين و كريستال للحفلات</p>
             
-            <a href="https://share.google/0KozlxnkGJHi5FVg9" target="_blank" class="map-btn">📍 افتح اللوكيشن على الخريطة</a>
+            <a href="https://maps.app.goo.gl/FuwWFoWyjxLFKwdWA" target="_blank" class="map-btn">📍 افتح اللوكيشن على الخريطة</a>
         </div>
 
         <div class="footer">
