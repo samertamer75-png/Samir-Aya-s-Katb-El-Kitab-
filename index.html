@@ -188,7 +188,7 @@
             font-style: italic;
         }
 
-        /* العداد التنازلي التفاعلي */
+        /* العداد التنازلي */
         .countdown-container {
             display: flex;
             justify-content: center;
@@ -221,7 +221,7 @@
             direction: rtl;
         }
 
-        /* معرض الصور */
+        /* معرض الصور مع الأسهم */
         .slider-container {
             position: relative;
             width: 100%;
@@ -229,12 +229,14 @@
             overflow: hidden;
             border-radius: 12px;
             background: #faf6f0;
-            padding: 10px;
-            min-height: 250px;
+            padding: 15px 10px;
+        }
+
+        .slider-wrapper {
+            position: relative;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
         }
 
         .slide-img {
@@ -242,14 +244,44 @@
             max-height: 400px;
             object-fit: contain;
             border-radius: 10px;
+            transition: opacity 0.3s ease;
         }
+
+        /* تنسيق أسهم التقليب */
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(139, 90, 43, 0.8);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+        }
+
+        .slider-btn:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .prev-btn { right: 10px; }
+        .next-btn { left: 10px; }
 
         .dots-container {
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 8px;
-            margin-top: 12px;
+            margin-top: 15px;
             flex-wrap: wrap;
         }
 
@@ -359,9 +391,13 @@
             </div>
         </div>
 
-        <!-- المعرض بنقاط التنقل لـ 7 صور -->
+        <!-- معرض الصور مع الأسهم ونقاط التنقل -->
         <div class="slider-container">
-            <img id="currentImage" class="slide-img" src="./image_1.png" alt="صورة العروسين">
+            <div class="slider-wrapper">
+                <button class="slider-btn prev-btn" onclick="changeSlide(1, event)">❯</button>
+                <img id="currentImage" class="slide-img" src="./image_1.png" alt="صورة العروسين">
+                <button class="slider-btn next-btn" onclick="changeSlide(-1, event)">❮</button>
+            </div>
             <div class="dots-container">
                 <span class="dot active" onclick="goToSlide(0, event)"></span>
                 <span class="dot" onclick="goToSlide(1, event)"></span>
@@ -416,7 +452,7 @@
             }
         }
 
-        // أسماء وإمتدادات الصور الدقيقة كما هي في GitHub
+        // قائمة الصور السبع
         var images = [
             "./image_1.png",
             "./image_2.png",
@@ -431,6 +467,21 @@
         function goToSlide(index, e) {
             if (e) e.stopPropagation();
             currentIndex = index;
+            updateSlider();
+        }
+
+        function changeSlide(direction, e) {
+            if (e) e.stopPropagation();
+            currentIndex += direction;
+            if (currentIndex >= images.length) {
+                currentIndex = 0;
+            } else if (currentIndex < 0) {
+                currentIndex = images.length - 1;
+            }
+            updateSlider();
+        }
+
+        function updateSlider() {
             var imgElem = document.getElementById('currentImage');
             if (imgElem) {
                 imgElem.src = images[currentIndex];
