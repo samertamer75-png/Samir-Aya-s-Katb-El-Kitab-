@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>دعوة كتب كتاب - سمير وآية</title>
+    <!-- مكتبة احتفالية للزخات الملونة (Confetti) -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         :root {
             --primary-color: #8b5a2b;
@@ -47,12 +49,13 @@
             z-index: 9999;
             padding: 20px;
             cursor: pointer;
-            transition: opacity 0.6s ease, transform 0.6s ease;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.7s ease, visibility 0.7s;
         }
 
         .envelope-screen.opened {
+            transform: scale(1.12) translateY(-40px);
             opacity: 0;
-            transform: scale(1.05);
+            visibility: hidden;
             pointer-events: none;
         }
 
@@ -67,6 +70,11 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        .invitation-card:hover {
+            transform: translateY(-3px);
         }
 
         .invited-text {
@@ -118,8 +126,8 @@
         }
 
         @keyframes pulseGlow {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            0%, 100% { transform: scale(1); box-shadow: 0 4px 12px rgba(0,0,0,0.35); }
+            50% { transform: scale(1.05); box-shadow: 0 6px 18px rgba(138, 28, 46, 0.4); }
         }
 
         .tap-to-open {
@@ -146,16 +154,15 @@
             border: 2px solid #f1e5d1;
             margin: 20px auto;
             display: none;
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
         }
 
         .main-content.visible {
             display: block !important;
-            animation: fadeIn 0.8s ease forwards;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .header-title {
@@ -247,7 +254,6 @@
             transition: opacity 0.3s ease;
         }
 
-        /* تنسيق أسهم التقليب */
         .slider-btn {
             position: absolute;
             top: 50%;
@@ -414,10 +420,9 @@
             <source src="Music.mp3" type="audio/mpeg">
         </audio>
 
-        <!-- التفاصيل -->
+        <!-- التفاصيل بدون كلمة "التاريخ والزمان" -->
         <div class="details">
-            <h3>🗓️ التاريخ والزمان</h3>
-            <p>الخميس، 31 ديسمبر 2026</p>
+            <p><strong>🗓️ الخميس، 31 ديسمبر 2026</strong></p>
             <p>من الساعة 2 ظهراً إلى الساعة 6 مساءً</p>
             
             <h3 style="margin-top: 20px;">📍 قاعات جرين و كريستال للحفلات</h3>
@@ -437,13 +442,22 @@
             
             if (env) {
                 env.classList.add('opened');
-                setTimeout(function() {
-                    env.style.display = 'none';
-                }, 600);
             }
             
-            if (main) {
-                main.classList.add('visible');
+            setTimeout(function() {
+                if (main) {
+                    main.classList.add('visible');
+                }
+            }, 300);
+
+            // إطلاق الاحتفال الملون (Confetti)
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 75,
+                    spread: 60,
+                    origin: { y: 0.6 },
+                    colors: ['#d4af37', '#8a1c2e', '#8b5a2b', '#ffffff']
+                });
             }
 
             var music = document.getElementById('weddingMusic');
