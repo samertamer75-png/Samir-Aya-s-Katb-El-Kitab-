@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>دعوة كتب كتاب - سمير وآية</title>
-    <!-- مكتبة احتفالية للزخات الملونة (Confetti) -->
+    <!-- مكتبة الاحتفال بالزخات الملونة (Confetti) -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         :root {
-            --primary-color: #8b5a2b;
-            --secondary-color: #d4af37;
-            --bg-color: #e8e3dc;
-            --card-bg: #f9f6f0;
-            --text-dark: #6e2a36;
+            --burgundy: #7a0f26;
+            --burgundy-dark: #4d0616;
+            --gold: #d4af37;
+            --bg-light: #fbf8f5;
+            --text-dark: #3a151d;
         }
 
         * {
@@ -22,523 +22,281 @@
         }
 
         body {
-            font-family: 'Traditional Arabic', 'Amiri', 'Segoe UI', Tahoma, sans-serif;
-            background-color: var(--bg-color);
-            color: #333;
-            text-align: center;
+            font-family: 'Amiri', 'Traditional Arabic', 'Segoe UI', Tahoma, sans-serif;
+            background-color: #1a0408;
+            color: var(--text-dark);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 15px;
             overflow-x: hidden;
         }
 
-        /* ===== شاشة الظرف المغلق ===== */
+        /* ===== شاشة الظرف الفاخر ===== */
         .envelope-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: var(--bg-color);
+            background: linear-gradient(135deg, var(--burgundy-dark), var(--burgundy), #30030c);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            padding: 20px;
             cursor: pointer;
-            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.7s ease, visibility 0.7s;
+            transition: transform 0.9s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.8s ease, visibility 0.8s;
+            box-shadow: inset 0 0 100px rgba(0,0,0,0.8);
         }
 
         .envelope-screen.opened {
-            transform: scale(1.12) translateY(-40px);
+            transform: scale(1.15) translateY(-50px);
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
         }
 
-        .invitation-card {
-            background-color: var(--card-bg);
-            width: 100%;
-            max-width: 400px;
-            padding: 30px 20px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            border: 2px solid var(--secondary-color);
+        .royal-envelope {
+            position: relative;
+            width: 90%;
+            max-width: 360px;
+            height: 520px;
+            background: radial-gradient(circle, #8d132d 0%, #580a1a 100%);
+            border-radius: 16px;
+            border: 2px solid rgba(212, 175, 55, 0.4);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.7), inset 0 0 30px rgba(0,0,0,0.5);
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
             align-items: center;
-            transition: transform 0.3s ease;
+            padding: 30px 20px;
+            overflow: hidden;
         }
 
-        .invitation-card:hover {
-            transform: translateY(-3px);
+        .royal-envelope::before, .royal-envelope::after {
+            content: "🌿🌸🌿";
+            position: absolute;
+            font-size: 2.2rem;
+            opacity: 0.25;
+            color: var(--gold);
+            filter: drop-shadow(0 2px 4px #000);
         }
+        .royal-envelope::before { top: 15px; right: 15px; transform: rotate(45deg); }
+        .royal-envelope::after { bottom: 15px; left: 15px; transform: rotate(-135deg); }
 
-        .invited-text {
-            font-size: 1.2rem;
-            color: var(--text-dark);
-            margin-bottom: 5px;
-            line-height: 1.5;
-        }
-
-        .couple-names-ar {
-            font-size: 2.8rem;
-            color: var(--text-dark);
-            font-weight: bold;
-            line-height: 1.2;
-            margin: 15px 0;
-        }
-
-        .couple-names-ar span {
-            display: block;
-        }
-
-        .and-symbol-ar {
-            font-size: 2rem;
-            color: var(--secondary-color);
-        }
-
-        .envelope-box {
-            position: relative;
+        .envelope-top-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            max-width: 280px;
-            height: 150px;
-            background: #ede6dd;
-            border-radius: 8px;
-            border: 1px solid #dcd3c8;
+            height: 220px;
+            background: linear-gradient(180deg, #6b0c20 0%, #4a0715 100%);
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+            border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+            z-index: 2;
+        }
+
+        .wax-seal-container {
+            position: absolute;
+            top: 180px;
+            z-index: 3;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 15px 0 20px 0;
         }
 
-        .wax-seal {
-            width: 65px;
-            height: 65px;
-            background: #8a1c2e;
+        .wax-seal-royal {
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, #a81c39 0%, #590918 100%);
             border-radius: 50%;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.35);
-            border: 2px solid #5c101c;
-            animation: pulseGlow 2.5s infinite;
+            border: 3px dashed var(--gold);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.6), inset 0 0 10px rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: sealPulse 2.2s infinite alternate;
         }
 
-        @keyframes pulseGlow {
-            0%, 100% { transform: scale(1); box-shadow: 0 4px 12px rgba(0,0,0,0.35); }
-            50% { transform: scale(1.05); box-shadow: 0 6px 18px rgba(138, 28, 46, 0.4); }
+        .wax-seal-royal::after {
+            content: "💍";
+            font-size: 1.8rem;
         }
 
-        .tap-to-open {
-            margin-top: 15px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: var(--text-dark);
-            animation: bounceText 1.8s infinite;
+        @keyframes sealPulse {
+            0% { transform: scale(1); box-shadow: 0 6px 20px rgba(0,0,0,0.6); }
+            100% { transform: scale(1.08); box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4); }
         }
 
-        @keyframes bounceText {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+        .tap-prompt {
+            position: absolute;
+            bottom: 40px;
+            color: #f3e5ab;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            animation: bouncePrompt 1.8s infinite;
+            z-index: 3;
         }
 
-        /* ===== محتوى الدعوة الداخلي ===== */
-        .main-content {
-            max-width: 550px;
+        @keyframes bouncePrompt {
+            0%, 100% { transform: translateY(0); opacity: 0.8; }
+            50% { transform: translateY(-6px); opacity: 1; }
+        }
+
+        /* ===== المحتوى الداخلي الرئيسي ===== */
+        .main-wrapper {
             width: 100%;
-            background: #ffffff;
-            padding: 30px 20px;
-            border-radius: 20px;
-            box-shadow: 0 10px 35px rgba(0,0,0,0.12);
-            border: 2px solid #f1e5d1;
-            margin: 20px auto;
+            max-width: 420px;
+            min-height: 100vh;
+            background-color: var(--bg-light);
             display: none;
-            opacity: 0;
-            transform: translateY(25px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 0 40px rgba(0,0,0,0.5);
+            padding-bottom: 40px;
         }
 
-        .main-content.visible {
-            display: block !important;
-            opacity: 1;
-            transform: translateY(0);
+        .main-wrapper.visible {
+            display: flex !important;
+            animation: fadeInUp 0.9s ease forwards;
         }
 
-        .header-title {
-            font-size: 2.2rem;
-            color: var(--primary-color);
-            margin-bottom: 10px;
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .names-ar-inside {
-            font-size: 3.2rem;
-            color: var(--secondary-color);
-            margin: 15px 0 10px 0;
+        .top-header-bar {
+            width: 100%;
+            background: linear-gradient(90deg, #590918, #8a132d, #590918);
+            color: var(--gold);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--gold);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .top-header-bar .date-badge {
+            background: rgba(212, 175, 55, 0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            border: 1px solid var(--gold);
+            font-size: 0.95rem;
+        }
+
+        .couple-header {
+            margin: 25px 0 15px 0;
+            text-align: center;
+        }
+
+        .couple-names {
+            font-size: 2.8rem;
+            color: var(--burgundy);
             font-weight: bold;
             line-height: 1.2;
         }
 
-        .names-ar-inside span {
-            display: block;
-        }
-
-        .and-symbol-inside {
+        .couple-names span {
+            color: var(--gold);
             font-size: 2rem;
-            color: var(--primary-color);
+            margin: 0 8px;
         }
 
-        .verse {
-            font-size: 1.2rem;
-            color: #555;
-            margin: 15px 0;
-            font-style: italic;
+        .sub-verse {
+            font-size: 1.05rem;
+            color: #666;
+            padding: 0 20px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            text-align: center;
         }
 
         /* العداد التنازلي */
-        .countdown-container {
+        .countdown-row {
             display: flex;
-            justify-content: center;
             gap: 10px;
-            margin: 25px 0;
+            margin: 10px 0 25px 0;
             direction: ltr;
         }
 
-        .time-box {
-            background: linear-gradient(145deg, #6e2a36, #8a1c2e);
-            border: 1px solid var(--secondary-color);
+        .count-card {
+            background: #ffffff;
+            border: 1px solid #e2d2be;
             border-radius: 12px;
-            padding: 10px 8px;
-            min-width: 65px;
-            box-shadow: 0 4px 12px rgba(110, 42, 54, 0.25);
-            color: #ffffff;
+            padding: 10px 12px;
+            min-width: 68px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(122, 15, 38, 0.08);
         }
 
-        .time-number {
+        .count-num {
             font-size: 1.5rem;
             font-weight: bold;
-            color: #d4af37;
-            font-family: 'Segoe UI', Tahoma, sans-serif;
+            color: var(--burgundy);
+            font-family: 'Segoe UI', sans-serif;
         }
 
-        .time-label {
-            font-size: 0.8rem;
-            color: #fdf8f2;
-            margin-top: 3px;
+        .count-unit {
+            font-size: 0.75rem;
+            color: #888;
+            margin-top: 2px;
             direction: rtl;
         }
 
-        /* معرض الصور مع الأسهم */
-        .slider-container {
+        /* معرض الصور الشبكي (Grid Layout) */
+        .album-section {
+            width: 90%;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .album-title {
+            font-size: 1.4rem;
+            color: var(--burgundy);
+            margin-bottom: 15px;
+            font-weight: bold;
             position: relative;
-            width: 100%;
-            margin: 25px 0;
-            overflow: hidden;
-            border-radius: 12px;
-            background: #faf6f0;
-            padding: 15px 10px;
-        }
-
-        .slider-wrapper {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .slide-img {
-            width: 100%;
-            max-height: 400px;
-            object-fit: contain;
-            border-radius: 10px;
-            transition: opacity 0.3s ease;
-        }
-
-        .slider-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(139, 90, 43, 0.8);
-            color: white;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-            transition: background 0.3s, transform 0.2s;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
-        }
-
-        .slider-btn:hover {
-            background-color: var(--primary-color);
-            transform: translateY(-50%) scale(1.1);
-        }
-
-        .prev-btn { right: 10px; }
-        .next-btn { left: 10px; }
-
-        .dots-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            margin-top: 15px;
-            flex-wrap: wrap;
-        }
-
-        .dot {
-            width: 11px;
-            height: 11px;
-            background-color: #dcd3c8;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .dot.active {
-            background-color: var(--primary-color);
-            transform: scale(1.3);
-        }
-
-        .details {
-            margin: 25px 0;
-            padding: 20px;
-            background: #fdf8f2;
-            border-radius: 12px;
-            border-right: 5px solid var(--secondary-color);
-            text-align: right;
-        }
-
-        .details p {
-            font-size: 1.2rem;
-            margin: 8px 0;
-        }
-
-        .map-btn {
             display: inline-block;
-            background-color: var(--secondary-color);
-            color: #fff;
-            padding: 12px 25px;
-            font-size: 1.1rem;
-            border-radius: 25px;
-            text-decoration: none;
-            margin-top: 15px;
-            font-weight: bold;
         }
 
-        .footer {
-            margin-top: 25px;
-            font-size: 1.2rem;
-            color: var(--primary-color);
-            font-weight: bold;
-        }
-    </style>
-</head>
-<body>
-
-    <!-- غلاف الدعوة -->
-    <div class="envelope-screen" id="envelopeScreen" onclick="openEnvelope()">
-        <div class="invitation-card">
-            <div class="invited-text">يسرنا دعوتكم لحضور حفل كتب كتاب</div>
-            
-            <div class="couple-names-ar">
-                <span>سمير</span>
-                <span class="and-symbol-ar">&</span>
-                <span>آية</span>
-            </div>
-
-            <div class="envelope-box">
-                <div class="wax-seal"></div>
-            </div>
-
-            <div style="color: #666; margin-bottom: 5px;">بداية فصل جديد من العمر</div>
-            <div style="font-weight: bold; color: var(--text-dark);">تكتمل بحضوركم</div>
-        </div>
-        
-        <div class="tap-to-open">اضغط في أي مكان لفتح الدعوة ✉️</div>
-    </div>
-
-    <!-- محتوى الدعوة من الداخل -->
-    <div class="main-content" id="mainContent">
-        <h1 class="header-title">دعوة كتب كتاب</h1>
-        
-        <p class="verse">"وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً"</p>
-
-        <div class="names-ar-inside">
-            <span>سمير</span>
-            <span class="and-symbol-inside">&</span>
-            <span>آية</span>
-        </div>
-
-        <p style="font-size: 1.2rem;">يتشرفان بدعوتكم لمشاركتهما فرحة عقد قرانهما</p>
-
-        <!-- العداد التنازلي -->
-        <div class="countdown-container">
-            <div class="time-box">
-                <div class="time-number" id="days">00</div>
-                <div class="time-label">يوم</div>
-            </div>
-            <div class="time-box">
-                <div class="time-number" id="hours">00</div>
-                <div class="time-label">ساعة</div>
-            </div>
-            <div class="time-box">
-                <div class="time-number" id="minutes">00</div>
-                <div class="time-label">دقيقة</div>
-            </div>
-            <div class="time-box">
-                <div class="time-number" id="seconds">00</div>
-                <div class="time-label">ثانية</div>
-            </div>
-        </div>
-
-        <!-- معرض الصور مع الأسهم ونقاط التنقل -->
-        <div class="slider-container">
-            <div class="slider-wrapper">
-                <button class="slider-btn prev-btn" onclick="changeSlide(1, event)">❯</button>
-                <img id="currentImage" class="slide-img" src="./image_1.png" alt="صورة العروسين">
-                <button class="slider-btn next-btn" onclick="changeSlide(-1, event)">❮</button>
-            </div>
-            <div class="dots-container">
-                <span class="dot active" onclick="goToSlide(0, event)"></span>
-                <span class="dot" onclick="goToSlide(1, event)"></span>
-                <span class="dot" onclick="goToSlide(2, event)"></span>
-                <span class="dot" onclick="goToSlide(3, event)"></span>
-                <span class="dot" onclick="goToSlide(4, event)"></span>
-                <span class="dot" onclick="goToSlide(5, event)"></span>
-                <span class="dot" onclick="goToSlide(6, event)"></span>
-            </div>
-        </div>
-
-        <!-- الصوت -->
-        <audio id="weddingMusic" loop>
-            <source src="Music.mp3" type="audio/mpeg">
-        </audio>
-
-        <!-- التفاصيل بدون كلمة "التاريخ والزمان" -->
-        <div class="details">
-            <p><strong>🗓️ الخميس، 31 ديسمبر 2026</strong></p>
-            <p>من الساعة 2 ظهراً إلى الساعة 6 مساءً</p>
-            
-            <h3 style="margin-top: 20px;">📍 قاعات جرين و كريستال للحفلات</h3>
-            
-            <a href="https://maps.app.goo.gl/FuwWFoWyjxLFKwdWA" target="_blank" class="map-btn">📍 افتح اللوكيشن على الخريطة</a>
-        </div>
-
-        <div class="footer">
-            حضوركم يسعدنا وتكتمل به فرحتنا! ❤️
-        </div>
-    </div>
-
-    <script>
-        function openEnvelope() {
-            var env = document.getElementById('envelopeScreen');
-            var main = document.getElementById('mainContent');
-            
-            if (env) {
-                env.classList.add('opened');
-            }
-            
-            setTimeout(function() {
-                if (main) {
-                    main.classList.add('visible');
-                }
-            }, 300);
-
-            // إطلاق الاحتفال الملون (Confetti)
-            if (typeof confetti === 'function') {
-                confetti({
-                    particleCount: 75,
-                    spread: 60,
-                    origin: { y: 0.6 },
-                    colors: ['#d4af37', '#8a1c2e', '#8b5a2b', '#ffffff']
-                });
-            }
-
-            var music = document.getElementById('weddingMusic');
-            if (music) {
-                music.play().catch(function(e) { console.log(e); });
-            }
+        .album-title::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 20%;
+            width: 60%;
+            height: 2px;
+            background: var(--gold);
         }
 
-        // قائمة الصور السبع
-        var images = [
-            "./image_1.png",
-            "./image_2.png",
-            "./image_3.png",
-            "./image_4.png",
-            "./image_5.jpeg",
-            "./image_6.jpeg",
-            "./image_7.jpeg"
-        ];
-        var currentIndex = 0;
-
-        function goToSlide(index, e) {
-            if (e) e.stopPropagation();
-            currentIndex = index;
-            updateSlider();
+        .grid-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            padding: 5px;
         }
 
-        function changeSlide(direction, e) {
-            if (e) e.stopPropagation();
-            currentIndex += direction;
-            if (currentIndex >= images.length) {
-                currentIndex = 0;
-            } else if (currentIndex < 0) {
-                currentIndex = images.length - 1;
-            }
-            updateSlider();
+        .gallery-card {
+            background: #fff;
+            padding: 8px;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            border: 1px solid #f0e4d5;
+            transition: transform 0.3s ease;
         }
 
-        function updateSlider() {
-            var imgElem = document.getElementById('currentImage');
-            if (imgElem) {
-                imgElem.src = images[currentIndex];
-            }
-            
-            var dots = document.querySelectorAll('.dot');
-            dots.forEach(function(dot, idx) {
-                if (idx === currentIndex) {
-                    dot.classList.add('active');
-                } else {
-                    dot.classList.remove('active');
-                }
-            });
+        .gallery-card:hover {
+            transform: translateY(-4px);
         }
 
-        // العداد التنازلي
-        var eventDate = new Date('December 31, 2026 14:00:00').getTime();
-
-        function updateCountdown() {
-            var now = new Date().getTime();
-            var difference = eventDate - now;
-
-            if (difference > 0) {
-                var days = Math.floor(difference / (1000 * 60 * 60 * 24));
-                var hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                var minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-                var seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-                document.getElementById('days').innerText = days < 10 ? '0' + days : days;
-                document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
-                document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
-                document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
-            } else {
-                document.getElementById('days').innerText = "00";
-                document.getElementById('hours').innerText = "00";
-                document.getElementById('minutes').innerText = "00";
-                document.getElementById('seconds').innerText = "00";
-            }
-        }
-
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
-    </script>
-
-</body>
-</html>
+        .gallery-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10
