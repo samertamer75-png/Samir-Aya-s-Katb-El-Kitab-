@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دعوة كتب كتاب - سمير وآية</title>
+    <title>Katb Kitab Invitation - Samir & Aya</title>
+    <!-- استيراد خطوط عربية وإنجليزية فخمة تخطف العين -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@500;700&family=Great+Vibes&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-color: #8b5a2b;
@@ -20,7 +22,7 @@
         }
 
         body {
-            font-family: 'Traditional Arabic', 'Amiri', 'Segoe UI', Tahoma, sans-serif;
+            font-family: 'Cinzel', 'Cairo', sans-serif;
             background-color: var(--bg-color);
             color: #333;
             text-align: center;
@@ -60,8 +62,8 @@
             background-color: var(--card-bg);
             width: 100%;
             max-width: 400px;
-            padding: 30px 20px;
-            border-radius: 12px;
+            padding: 35px 20px;
+            border-radius: 14px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
             border: 2px solid var(--secondary-color);
             display: flex;
@@ -69,462 +71,32 @@
             align-items: center;
         }
 
-        .invited-text {
-            font-size: 1.15rem;
+        .invited-text-en {
+            font-size: 1.1rem;
             color: var(--text-dark);
             margin-bottom: 5px;
-            line-height: 1.5;
-            font-weight: bold;
+            letter-spacing: 1px;
+            font-weight: 600;
         }
 
-        .couple-names-ar {
-            font-size: 2.8rem;
+        .couple-names-en {
+            font-size: 3rem;
             color: var(--text-dark);
-            font-weight: bold;
-            line-height: 1.2;
+            font-family: 'Great Vibes', cursive;
             margin: 15px 0;
+            line-height: 1.1;
         }
 
-        .couple-names-ar span {
+        .couple-names-en span {
             display: block;
-        }
-
-        .and-symbol-ar {
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: var(--secondary-color);
+            font-family: 'Cinzel', serif;
         }
 
         .envelope-box {
             position: relative;
             width: 100%;
             max-width: 280px;
-            height: 150px;
-            background: #ede6dd;
-            border-radius: 8px;
-            border: 1px solid #dcd3c8;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 15px 0 20px 0;
-        }
-
-        .wax-seal {
-            width: 65px;
-            height: 65px;
-            background: #8a1c2e;
-            border-radius: 50%;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.35);
-            border: 2px solid #5c101c;
-            animation: pulseGlow 2.5s infinite;
-        }
-
-        @keyframes pulseGlow {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .tap-to-open {
-            margin-top: 15px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: var(--text-dark);
-            animation: bounceText 1.8s infinite;
-        }
-
-        @keyframes bounceText {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-
-        /* ===== محتوى الدعوة الداخلي ===== */
-        .main-content {
-            max-width: 550px;
-            width: 100%;
-            background: #ffffff;
-            padding: 30px 20px;
-            border-radius: 20px;
-            box-shadow: 0 10px 35px rgba(0,0,0,0.12);
-            border: 2px solid #f1e5d1;
-            margin: 20px auto;
-            display: none;
-        }
-
-        .main-content.visible {
-            display: block !important;
-            animation: fadeIn 0.8s ease forwards;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .header-title {
-            font-size: 1.8rem;
-            color: var(--primary-color);
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
-
-        .names-ar-inside {
-            font-size: 3.2rem;
-            color: var(--secondary-color);
-            margin: 15px 0 10px 0;
-            font-weight: bold;
-            line-height: 1.2;
-        }
-
-        .names-ar-inside span {
-            display: block;
-        }
-
-        .and-symbol-inside {
-            font-size: 2rem;
-            color: var(--primary-color);
-        }
-
-        .verse {
-            font-size: 1.2rem;
-            color: #555;
-            margin: 15px 0;
-            font-style: italic;
-        }
-
-        /* العداد التنازلي */
-        .countdown-container {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin: 25px 0;
-            direction: ltr;
-        }
-
-        .time-box {
-            background: linear-gradient(145deg, #6e2a36, #8a1c2e);
-            border: 1px solid var(--secondary-color);
-            border-radius: 12px;
-            padding: 10px 8px;
-            min-width: 65px;
-            box-shadow: 0 4px 12px rgba(110, 42, 54, 0.25);
-            color: #ffffff;
-        }
-
-        .time-number {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #d4af37;
-            font-family: 'Segoe UI', Tahoma, sans-serif;
-        }
-
-        .time-label {
-            font-size: 0.8rem;
-            color: #fdf8f2;
-            margin-top: 3px;
-            direction: rtl;
-        }
-
-        /* معرض الصور مع الأسهم */
-        .slider-container {
-            position: relative;
-            width: 100%;
-            margin: 25px 0;
-            overflow: hidden;
-            border-radius: 12px;
-            background: #faf6f0;
-            padding: 15px 10px;
-        }
-
-        .slider-wrapper {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .slide-img {
-            width: 100%;
-            max-height: 400px;
-            object-fit: contain;
-            border-radius: 10px;
-            transition: opacity 0.3s ease;
-        }
-
-        /* تنسيق أسهم التقليب */
-        .slider-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(139, 90, 43, 0.8);
-            color: white;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-            transition: background 0.3s, transform 0.2s;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
-        }
-
-        .slider-btn:hover {
-            background-color: var(--primary-color);
-            transform: translateY(-50%) scale(1.1);
-        }
-
-        .prev-btn { right: 10px; }
-        .next-btn { left: 10px; }
-
-        .dots-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            margin-top: 15px;
-            flex-wrap: wrap;
-        }
-
-        .dot {
-            width: 11px;
-            height: 11px;
-            background-color: #dcd3c8;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .dot.active {
-            background-color: var(--primary-color);
-            transform: scale(1.3);
-        }
-
-        .details {
-            margin: 25px 0;
-            padding: 20px;
-            background: #fdf8f2;
-            border-radius: 12px;
-            border-right: 5px solid var(--secondary-color);
-            text-align: right;
-        }
-
-        .details p {
-            font-size: 1.2rem;
-            margin: 8px 0;
-        }
-
-        .map-btn {
-            display: inline-block;
-            background-color: var(--secondary-color);
-            color: #fff;
-            padding: 12px 25px;
-            font-size: 1.1rem;
-            border-radius: 25px;
-            text-decoration: none;
-            margin-top: 15px;
-            font-weight: bold;
-        }
-
-        .footer {
-            margin-top: 25px;
-            font-size: 1.2rem;
-            color: var(--primary-color);
-            font-weight: bold;
-        }
-    </style>
-</head>
-<body>
-
-    <!-- غلاف الدعوة -->
-    <div class="envelope-screen" id="envelopeScreen" onclick="openEnvelope()">
-        <div class="invitation-card">
-            <div class="invited-text">نتشرف بدعوة حضرتك لحضور كتب كتاب</div>
-            
-            <div class="couple-names-ar">
-                <span>سمير</span>
-                <span class="and-symbol-ar">&</span>
-                <span>آية</span>
-            </div>
-
-            <div class="envelope-box">
-                <div class="wax-seal"></div>
-            </div>
-
-            <div style="color: #666; margin-bottom: 5px;">بداية فصل جديد من العمر</div>
-            <div style="font-weight: bold; color: var(--text-dark);">تكتمل بحضوركم</div>
-        </div>
-        
-        <div class="tap-to-open">اضغط في أي مكان لفتح الدعوة ✉️</div>
-    </div>
-
-    <!-- محتوى الدعوة من الداخل -->
-    <div class="main-content" id="mainContent">
-        <h1 class="header-title">نتشرف بدعوة حضرتك لحضور كتب كتاب</h1>
-        
-        <p class="verse">"وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً"</p>
-
-        <div class="names-ar-inside">
-            <span>سمير</span>
-            <span class="and-symbol-inside">&</span>
-            <span>آية</span>
-        </div>
-
-        <p style="font-size: 1.2rem;">يتشرفان بدعوتكم لمشاركتهما فرحة عقد قرانهما</p>
-
-        <!-- العداد التنازلي -->
-        <div class="countdown-container">
-            <div class="time-box">
-                <div class="time-number" id="days">00</div>
-                <div class="time-label">يوم</div>
-            </div>
-            <div class="time-box">
-                <div class="time-number" id="hours">00</div>
-                <div class="time-label">ساعة</div>
-            </div>
-            <div class="time-box">
-                <div class="time-number" id="minutes">00</div>
-                <div class="time-label">دقيقة</div>
-            </div>
-            <div class="time-box">
-                <div class="time-number" id="seconds">00</div>
-                <div class="time-label">ثانية</div>
-            </div>
-        </div>
-
-        <!-- معرض الصور مع الأسهم ونقاط التنقل -->
-        <div class="slider-container">
-            <div class="slider-wrapper">
-                <button class="slider-btn prev-btn" onclick="changeSlide(1, event)">❯</button>
-                <img id="currentImage" class="slide-img" src="./image_1.png" alt="صورة العروسين">
-                <button class="slider-btn next-btn" onclick="changeSlide(-1, event)">❮</button>
-            </div>
-            <div class="dots-container">
-                <span class="dot active" onclick="goToSlide(0, event)"></span>
-                <span class="dot" onclick="goToSlide(1, event)"></span>
-                <span class="dot" onclick="goToSlide(2, event)"></span>
-                <span class="dot" onclick="goToSlide(3, event)"></span>
-                <span class="dot" onclick="goToSlide(4, event)"></span>
-                <span class="dot" onclick="goToSlide(5, event)"></span>
-                <span class="dot" onclick="goToSlide(6, event)"></span>
-            </div>
-        </div>
-
-        <!-- الصوت -->
-        <audio id="weddingMusic" loop>
-            <source src="Music.mp3" type="audio/mpeg">
-        </audio>
-
-        <!-- التفاصيل -->
-        <div class="details">
-            <p><strong>🗓️ الخميس، 31 ديسمبر 2026 - الساعة 2 ظهراً</strong></p>
-            
-            <h3 style="margin-top: 20px;">📍 قاعات جرين و كريستال للحفلات</h3>
-            
-            <a href="https://maps.app.goo.gl/FuwWFoWyjxLFKwdWA" target="_blank" class="map-btn">📍 افتح اللوكيشن على الخريطة</a>
-        </div>
-
-        <div class="footer">
-            حضوركم يسعدنا وتكتمل به فرحتنا! ❤️
-        </div>
-    </div>
-
-    <script>
-        function openEnvelope() {
-            var env = document.getElementById('envelopeScreen');
-            var main = document.getElementById('mainContent');
-            
-            if (env) {
-                env.classList.add('opened');
-                setTimeout(function() {
-                    env.style.display = 'none';
-                }, 600);
-            }
-            
-            if (main) {
-                main.classList.add('visible');
-            }
-
-            var music = document.getElementById('weddingMusic');
-            if (music) {
-                music.play().catch(function(e) { console.log(e); });
-            }
-        }
-
-        // قائمة الصور السبع
-        var images = [
-            "./image_1.png",
-            "./image_2.png",
-            "./image_3.png",
-            "./image_4.png",
-            "./image_5.jpeg",
-            "./image_6.jpeg",
-            "./image_7.jpeg"
-        ];
-        var currentIndex = 0;
-
-        function goToSlide(index, e) {
-            if (e) e.stopPropagation();
-            currentIndex = index;
-            updateSlider();
-        }
-
-        function changeSlide(direction, e) {
-            if (e) e.stopPropagation();
-            currentIndex += direction;
-            if (currentIndex >= images.length) {
-                currentIndex = 0;
-            } else if (currentIndex < 0) {
-                currentIndex = images.length - 1;
-            }
-            updateSlider();
-        }
-
-        function updateSlider() {
-            var imgElem = document.getElementById('currentImage');
-            if (imgElem) {
-                imgElem.src = images[currentIndex];
-            }
-            
-            var dots = document.querySelectorAll('.dot');
-            dots.forEach(function(dot, idx) {
-                if (idx === currentIndex) {
-                    dot.classList.add('active');
-                } else {
-                    dot.classList.remove('active');
-                }
-            });
-        }
-
-        // العداد التنازلي
-        var eventDate = new Date('December 31, 2026 14:00:00').getTime();
-
-        function updateCountdown() {
-            var now = new Date().getTime();
-            var difference = eventDate - now;
-
-            if (difference > 0) {
-                var days = Math.floor(difference / (1000 * 60 * 60 * 24));
-                var hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                var minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-                var seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-                document.getElementById('days').innerText = days < 10 ? '0' + days : days;
-                document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
-                document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
-                document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
-            } else {
-                document.getElementById('days').innerText = "00";
-                document.getElementById('hours').innerText = "00";
-                document.getElementById('minutes').innerText = "00";
-                document.getElementById('seconds').innerText = "00";
-            }
-        }
-
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
-    </script>
-
-</body>
-</html>
+            height: 140px;
+            background: #ede
