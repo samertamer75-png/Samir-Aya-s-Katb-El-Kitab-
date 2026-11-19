@@ -221,7 +221,7 @@
             margin-top: 3px;
         }
 
-        /* معرض الصور بأبعاد أكبر وواضحة */
+        /* معرض الصور بأبعاد واضحة بدون بهتان */
         .slider-container {
             position: relative;
             width: 100%;
@@ -229,7 +229,7 @@
             overflow: hidden;
             border-radius: 12px;
             background: #faf6f0;
-            padding: 10px;
+            padding: 12px;
         }
 
         .slider-wrapper {
@@ -237,18 +237,19 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 360px;
+            min-height: 320px;
         }
 
         .slide-img {
             display: block;
             width: 100%;
             height: auto;
-            min-height: 360px;
-            max-height: 550px;
-            object-fit: cover;
+            max-height: 460px;
+            object-fit: contain;
+            opacity: 1 !important;
+            filter: none !important;
             border-radius: 10px;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.25s ease;
         }
 
         .slider-btn {
@@ -288,251 +289,4 @@
             flex-wrap: wrap;
         }
 
-        .dot {
-            width: 11px;
-            height: 11px;
-            background-color: #dcd3c8;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .dot.active {
-            background-color: var(--primary-color);
-            transform: scale(1.3);
-        }
-
-        .details {
-            margin: 25px 0;
-            padding: 20px;
-            background: #fdf8f2;
-            border-radius: 12px;
-            border-left: 5px solid var(--secondary-color);
-            text-align: left;
-        }
-
-        .details p {
-            font-size: 1.1rem;
-            margin: 8px 0;
-            color: #444;
-            font-weight: 500;
-        }
-
-        .map-btn {
-            display: inline-block;
-            background-color: var(--secondary-color);
-            color: #fff;
-            padding: 12px 25px;
-            font-size: 1rem;
-            border-radius: 25px;
-            text-decoration: none;
-            margin-top: 15px;
-            font-weight: bold;
-            letter-spacing: 0.5px;
-            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
-            transition: transform 0.2s;
-        }
-
-        .map-btn:hover {
-            transform: scale(1.03);
-        }
-
-        .footer {
-            margin-top: 25px;
-            font-size: 1.15rem;
-            color: var(--primary-color);
-            font-weight: bold;
-            letter-spacing: 0.5px;
-        }
-    </style>
-</head>
-<body>
-
-    <!-- غلاف الدعوة -->
-    <div class="envelope-screen" id="envelopeScreen" onclick="openEnvelope()">
-        <div class="invitation-card">
-            <div class="top-subtitle">We cordially invite you to attend the marriage contract signing (katb al-kitab)</div>
-            
-            <div class="couple-names-style">
-                Samir
-                <span class="and-symbol">&</span>
-                Aya
-            </div>
-
-            <div class="envelope-box">
-                <div class="wax-seal"></div>
-            </div>
-
-            <div style="color: #666; font-size: 0.85rem; letter-spacing: 1px;">THE BEGINNING OF FOREVER</div>
-        </div>
-        
-        <div class="tap-to-open">Tap anywhere to open ✉️</div>
-    </div>
-
-    <!-- محتوى الدعوة الداخلي -->
-    <div class="main-content" id="mainContent">
-        <div class="top-subtitle">We cordially invite you to attend the marriage contract signing (katb al-kitab)</div>
-        
-        <div class="couple-names-style" style="font-size: 3.5rem;">
-            Samir
-            <span class="and-symbol">&</span>
-            Aya
-        </div>
-
-        <!-- الآية القرآنية بالخط العربي الفاخر -->
-        <p class="verse-ar">"وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً"</p>
-
-        <!-- العداد التنازلي -->
-        <div class="countdown-container">
-            <div class="time-box">
-                <div class="time-number" id="days">00</div>
-                <div class="time-label">Days</div>
-            </div>
-            <div class="time-box">
-                <div class="time-number" id="hours">00</div>
-                <div class="time-label">Hours</div>
-            </div>
-            <div class="time-box">
-                <div class="time-number" id="minutes">00</div>
-                <div class="time-label">Mins</div>
-            </div>
-            <div class="time-box">
-                <div class="time-number" id="seconds">00</div>
-                <div class="time-label">Secs</div>
-            </div>
-        </div>
-
-        <!-- معرض الصور مع الأسهم -->
-        <div class="slider-container">
-            <div class="slider-wrapper">
-                <button class="slider-btn prev-btn" onclick="changeSlide(1, event)">❯</button>
-                <img id="currentImage" class="slide-img" src="./image_1.png" alt="Couple Photo" onerror="this.style.opacity='0.3'">
-                <button class="slider-btn next-btn" onclick="changeSlide(-1, event)">❮</button>
-            </div>
-            <div class="dots-container">
-                <span class="dot active" onclick="goToSlide(0, event)"></span>
-                <span class="dot" onclick="goToSlide(1, event)"></span>
-                <span class="dot" onclick="goToSlide(2, event)"></span>
-                <span class="dot" onclick="goToSlide(3, event)"></span>
-                <span class="dot" onclick="goToSlide(4, event)"></span>
-                <span class="dot" onclick="goToSlide(5, event)"></span>
-                <span class="dot" onclick="goToSlide(6, event)"></span>
-            </div>
-        </div>
-
-        <!-- الصوت -->
-        <audio id="weddingMusic" loop>
-            <source src="Music.mp3" type="audio/mpeg">
-        </audio>
-
-        <!-- التفاصيل -->
-        <div class="details">
-            <p><strong>🗓️ Date:</strong> Thursday, Dec 31, 2026</p>
-            <p><strong>⏰ Time:</strong> 2:00 PM</p>
-            <p style="margin-top: 12px;"><strong>📍 Venue:</strong> Green & Crystal Halls</p>
-            
-            <a href="https://maps.app.goo.gl/FuwWFoWyjxLFKwdWA" target="_blank" class="map-btn">📍 Open Location on Map</a>
-        </div>
-
-        <div class="footer">
-            Your presence completes our joy! ❤️
-        </div>
-    </div>
-
-    <script>
-        function openEnvelope() {
-            var env = document.getElementById('envelopeScreen');
-            var main = document.getElementById('mainContent');
-            
-            if (env) {
-                env.classList.add('opened');
-                setTimeout(function() {
-                    env.style.display = 'none';
-                }, 600);
-            }
-            
-            if (main) {
-                main.classList.add('visible');
-            }
-
-            var music = document.getElementById('weddingMusic');
-            if (music) {
-                music.play().catch(function(e) { console.log(e); });
-            }
-        }
-
-        var images = [
-            "./image_1.png",
-            "./image_2.png",
-            "./image_3.png",
-            "./image_4.png",
-            "./image_5.jpeg",
-            "./image_6.jpeg",
-            "./image_7.jpeg"
-        ];
-        var currentIndex = 0;
-
-        function goToSlide(index, e) {
-            if (e) e.stopPropagation();
-            currentIndex = index;
-            updateSlider();
-        }
-
-        function changeSlide(direction, e) {
-            if (e) e.stopPropagation();
-            currentIndex += direction;
-            if (currentIndex >= images.length) {
-                currentIndex = 0;
-            } else if (currentIndex < 0) {
-                currentIndex = images.length - 1;
-            }
-            updateSlider();
-        }
-
-        function updateSlider() {
-            var imgElem = document.getElementById('currentImage');
-            if (imgElem) {
-                imgElem.src = images[currentIndex];
-            }
-            
-            var dots = document.querySelectorAll('.dot');
-            dots.forEach(function(dot, idx) {
-                if (idx === currentIndex) {
-                    dot.classList.add('active');
-                } else {
-                    dot.classList.remove('active');
-                }
-            });
-        }
-
-        // العداد التنازلي
-        var eventDate = new Date('December 31, 2026 14:00:00').getTime();
-
-        function updateCountdown() {
-            var now = new Date().getTime();
-            var difference = eventDate - now;
-
-            if (difference > 0) {
-                var days = Math.floor(difference / (1000 * 60 * 60 * 24));
-                var hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                var minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-                var seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-                document.getElementById('days').innerText = days < 10 ? '0' + days : days;
-                document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
-                document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
-                document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
-            } else {
-                document.getElementById('days').innerText = "00";
-                document.getElementById('hours').innerText = "00";
-                document.getElementById('minutes').innerText = "00";
-                document.getElementById('seconds').innerText = "00";
-            }
-        }
-
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
-    </script>
-
-</body>
-</html>
+        .dot
